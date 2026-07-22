@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HOMUTY</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            touch-action: none;
+            user-select: none;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #030508;
+            color: #f0f2f5;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .game-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #020305;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ЭКРАН ЗАГРУЗКИ */
+        .app-splash-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #020305;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        .splash-title {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.4));
+        }
+        .splash-progress-bg {
+            width: 240px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+        .splash-progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            box-shadow: 0 0 12px #38bdf8;
+            transition: width 0.05s linear;
+        }
+
+        .ui-overlay {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            right: 25px;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #64748b;
+            z-index: 5;
+            display: none;
+        }
+        .ui-overlay span {
+            color: #38bdf8;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.9);
+        }
+
+        .game-toast {
+            position: absolute;
+            top: 75px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: rgba(11, 19, 41, 0.92);
+            border: 1px solid #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            z-index: 30;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            text-align: center;
+            max-width: 85%;
+            white-space: nowrap;
+        }
+        .game-toast.active {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .loading-overlay {
+position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 5, 8, 0.88);
+            backdrop-filter: blur(12px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 40;
+        }
+        .loading-box {
+            background: #0b1329;
+            border: 1px solid #38bdf8;
+            padding: 25px 35px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .loading-text {
+            font-size: 15px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(56, 189, 248, 0.2);
+            border-top: 4px solid #38bdf8;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .back-arrow-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        .back-arrow-btn:active {
+            transform: scale(0.9);
+            background: #38bdf8;
+            color: #030508;
+        }
+
+        /* ГЛАВНОЕ МЕНЮ */
+        .menu-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 5, 8, 0.35);
+            backdrop-filter: blur(3px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .menu-screen h1 {
+            font-size: 64px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc, #ec4899);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientAnim 4s ease infinite;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.8));
+        }
+
+        @keyframes gradientAnim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .wallet-display {
+            background: rgba(251, 191, 36, 0.15);
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            padding: 8px 22px;
+            border-radius: 20px;
+            font-size: 17px;
+            font-weight: 800;
+            color: #fbbf24;
+            margin-bottom: 25px;
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(8px);
+        }
+
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 250px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+color: #030508;
+            border: none;
+            padding: 15px 20px;
+            font-size: 15px;
+            font-weight: 900;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            box-shadow: 0 5px 25px rgba(56, 189, 248, 0.5);
+            letter-spacing: 1.5px;
+            text-align: center;
+        }
+        .btn:active {
+            transform: scale(0.94);
+        }
+        .btn-secondary {
+            background: rgba(11, 19, 41, 0.65);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .sub-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 5, 8, 0.92);
+            backdrop-filter: blur(18px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            z-index: 15;
+            padding: 25px 20px;
+            overflow-y: auto;
+            touch-action: pan-y;
+        }
+        .sub-screen h2 {
+            font-size: 26px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 12px;
+            margin-top: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .shop-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #94a3b8;
+            padding: 9px 22px;
+            border-radius: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+        .tab-btn.active {
+            background: #38bdf8;
+            color: #030508;
+            border-color: #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        .shop-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 380px;
+            margin-bottom: 25px;
+        }
+
+        .shop-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .preview-box {
+            width: 60px;
+            height: 60px;
+            background: #020305;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
+        }
+        .preview-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .shop-item-info {
+            flex-grow: 1;
+            text-align: left;
+        }
+        .shop-item-info h4 {
+            font-size: 15px;
+            color: #fff;
+            margin-bottom: 3px;
+            font-weight: 700;
+        }
+        .shop-item-info p {
+            font-size: 11px;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .item-action-btn {
+            background: #38bdf8;
+            color: #030508;
+            border: none;
+            padding: 9px 14px;
+            font-size: 11px;
+            font-weight: 900;
+            border-radius: 14px;
+cursor: pointer;
+            flex-shrink: 0;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+        }
+        .item-action-btn:active {
+            transform: scale(0.92);
+        }
+        .item-action-btn.equipped {
+            background: rgba(255, 255, 255, 0.08);
+            color: #64748b;
+            box-shadow: none;
+            cursor: default;
+        }
+        .item-action-btn.buy {
+            background: #fbbf24;
+            color: #030508;
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.3);
+        }
+
+        .setting-item {
+            margin-bottom: 16px;
+            width: 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+        }
+        .setting-item label {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        #musicFileInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="file" id="musicFileInput" accept="audio/*">
+    <audio id="customAudio" loop></audio>
+
+    <div class="game-container">
+        <div class="app-splash-screen" id="appSplashScreen">
+            <div class="splash-title">HOMUTY</div>
+            <div class="splash-progress-bg">
+                <div class="splash-progress-fill" id="splashFill"></div>
+            </div>
+        </div>
+
+        <div class="game-toast" id="gameToast"></div>
+
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-box">
+                <div class="spinner"></div>
+                <div class="loading-text">ОБРАБОТКА И ЗАГРУЗКА ТРЕКА...</div>
+            </div>
+        </div>
+
+        <div class="ui-overlay" id="uiOverlay">
+            <div>СЧЁТ: <span id="scoreVal">0</span></div>
+            <div>РЕКОРД: <span id="highScoreVal">0</span></div>
+        </div>
+
+        <div class="menu-screen" id="mainMenu">
+            <h1 id="menuTitle">HOMUTY</h1>
+            <div class="wallet-display" id="walletDisplay">💰 МОНЕТЫ: <span id="coinsCount">0</span></div>
+            <div class="menu-buttons">
+                <button class="btn" id="playBtn">ИГРАТЬ</button>
+                <button class="btn btn-secondary" id="shopBtn">МАГАЗИН</button>
+                <button class="btn btn-secondary" id="settingsBtn">НАСТРОЙКИ</button>
+            </div>
+        </div>
+
+        <div class="sub-screen" id="shopMenu">
+            <div class="back-arrow-btn" id="backArrowShop">←</div>
+            <h2>МАГАЗИН</h2>
+            <div class="wallet-display">💰 <span id="shopCoinsCount">0</span></div>
+            
+            <div class="shop-tabs">
+                <button class="tab-btn active" id="tabSkinsBtn">СКИНЫ</button>
+                <button class="tab-btn" id="tabMapsBtn">КАРТЫ</button>
+            </div>
+
+            <div class="shop-grid" id="shopItemsContainer"></div>
+        </div>
+
+        <div class="sub-screen" id="settingsMenu" style="justify-content: center;">
+            <div class="back-arrow-btn" id="backArrowSettings">←</div>
+            <h2>НАСТРОЙКИ</h2>
+            <div class="setting-item">
+                <label>Фоновая музыка:</label>
+                <button class="btn" id="toggleMusicBtn">МУЗЫКА: ВКЛ</button>
+            </div>
+            <div class="setting-item">
+                <label>Свой трек с устройства:</label>
+                <button class="btn btn-secondary" id="loadMusicBtn">ЗАГРУЗИТЬ ТРЕК</button>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <script>
+        const splashScreen = document.getElementById('appSplashScreen');
+        const splashFill = document.getElementById('splashFill');
+        
+        let splashProgress = 0;
+        const splashInterval = setInterval(() => {
+            splashProgress += 4;
+            if (splashProgress > 100) splashProgress = 100;
+            splashFill.style.width = splashProgress + '%';
+            
+            if (splashProgress >= 100) {
+clearInterval(splashInterval);
+                setTimeout(() => {
+                    splashScreen.style.opacity = '0';
+                    setTimeout(() => { splashScreen.style.display = 'none'; }, 500);
+                }, 150);
+            }
+        }, 60);
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        const mainMenu = document.getElementById('mainMenu');
+        const shopMenu = document.getElementById('shopMenu');
+        const settingsMenu = document.getElementById('settingsMenu');
+        const playBtn = document.getElementById('playBtn');
+        const shopBtn = document.getElementById('shopBtn');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const backArrowShop = document.getElementById('backArrowShop');
+        const backArrowSettings = document.getElementById('backArrowSettings');
+        const toggleMusicBtn = document.getElementById('toggleMusicBtn');
+        const loadMusicBtn = document.getElementById('loadMusicBtn');
+        const musicFileInput = document.getElementById('musicFileInput');
+        const customAudio = document.getElementById('customAudio');
+        const uiOverlay = document.getElementById('uiOverlay');
+        const scoreVal = document.getElementById('scoreVal');
+        const highScoreVal = document.getElementById('highScoreVal');
+        const menuTitle = document.getElementById('menuTitle');
+        const coinsCount = document.getElementById('coinsCount');
+        const shopCoinsCount = document.getElementById('shopCoinsCount');
+        const tabSkinsBtn = document.getElementById('tabSkinsBtn');
+        const tabMapsBtn = document.getElementById('tabMapsBtn');
+        const shopItemsContainer = document.getElementById('shopItemsContainer');
+        const gameToast = document.getElementById('gameToast');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        let gameRunning = false;
+        let isAutoPlay = true; 
+        let score = 0;
+        let highScore = parseInt(localStorage.getItem('homuty_v6_highscore')) || 0;
+        let totalCoins = parseInt(localStorage.getItem('homuty_v6_coins')) || 0;
+        
+        let tutorialShown = localStorage.getItem('homuty_tutorial_done') === 'true';
+        let congratsCount = parseInt(localStorage.getItem('homuty_congrats_count')) || 0;
+
+        let unlockedSkins = JSON.parse(localStorage.getItem('homuty_v6_unlocked_skins')) || ['default'];
+        let currentSkin = localStorage.getItem('homuty_v6_current_skin') || 'default';
+
+        let unlockedMaps = JSON.parse(localStorage.getItem('homuty_v6_unlocked_maps')) || [0];
+        let currentMapIndex = parseInt(localStorage.getItem('homuty_v6_current_map')) || 0;
+
+        let activeShopTab = 'skins';
+        let musicEnabled = true;
+        let useCustomMusic = false;
+
+        let audioCtx = null;
+        let analyser = null;
+        let dataArray = null;
+        let sourceNode = null;
+        let melodyTimer = null;
+        let bassPulse = 0;
+
+        // Белая вспышка на старте -> прозрачность внутрянки
+        let bassCircleIntro = 1.0; 
+
+        let toastTimeout = null;
+        let milestoneShownThisRun = false;
+
+        let stars = [];
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < 100; i++) {
+                stars.push({
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    size: Math.random() * 2 + 0.5,
+                    speed: Math.random() * 0.8 + 0.2,
+                    alpha: Math.random(),
+                    twinkleSpeed: Math.random() * 0.03 + 0.01
+                });
+            }
+        }
+        initStars();
+const colorThemes = [
+            { id: 0, name: 'Кибер Синий', price: 0, primary: '#38bdf8', obstacle: '#818cf8', darkBlock: '#0b1329' },
+            { id: 1, name: 'Неоновый Закат', price: 500, primary: '#f97316', obstacle: '#fb923c', darkBlock: '#29110b' },
+            { id: 2, name: 'Изумрудная Матрица', price: 1000, primary: '#10b981', obstacle: '#34d399', darkBlock: '#0b2918' },
+            { id: 3, name: 'Синтвейв Пурпур', price: 1800, primary: '#ec4899', obstacle: '#f472b6', darkBlock: '#290b21' },
+            { id: 4, name: 'Золотой Дворец', price: 3000, primary: '#eab308', obstacle: '#facc15', darkBlock: '#29230b' },
+            { id: 5, name: 'Тёмная Бездна', price: 4500, primary: '#a855f7', obstacle: '#c084fc', darkBlock: '#1a0b29' },
+            { id: 6, name: 'Радужный Спектр', price: 7500, primary: '#ff007f', obstacle: '#00f0ff', darkBlock: '#120b29', isNeonRainbow: true }
+        ];
+
+        const skinsList = [
+            { id: 'default', name: 'Классическое Ядро', price: 0, desc: 'Фирменный стиль HOMUTY' },
+            { id: 'eyes', name: 'Кибер-Глаз', price: 600, desc: 'Живой взгляд с анимированным зрачком' },
+            { id: 'rainbow', name: 'Радужный Перелив', price: 1500, desc: 'Динамическая радужная палитра' },
+            { id: 'void', name: 'Тёмная Материя', price: 2500, desc: 'Гравитационное силовое поле' },
+            { id: 'plasma', name: 'Плазменный Разряд', price: 4000, desc: 'Высоковольтный молниевый шлейф' },
+            { id: 'gold', name: 'Золотой Элит', price: 6000, desc: 'Премиум сияние из чистого золота' }
+        ];
+
+        highScoreVal.innerText = highScore;
+        updateWalletUI();
+
+        function showToast(text, duration = 3000) {
+            if (toastTimeout) clearTimeout(toastTimeout);
+            gameToast.innerText = text;
+            gameToast.classList.add('active');
+            toastTimeout = setTimeout(() => {
+                gameToast.classList.remove('active');
+            }, duration);
+        }
+
+        function updateWalletUI() {
+            coinsCount.innerText = totalCoins;
+            shopCoinsCount.innerText = totalCoins;
+            localStorage.setItem('homuty_v6_coins', totalCoins);
+            localStorage.setItem('homuty_v6_highscore', highScore);
+        }
+
+        function saveGameData() {
+            localStorage.setItem('homuty_v6_unlocked_skins', JSON.stringify(unlockedSkins));
+            localStorage.setItem('homuty_v6_current_skin', currentSkin);
+            localStorage.setItem('homuty_v6_unlocked_maps', JSON.stringify(unlockedMaps));
+            localStorage.setItem('homuty_v6_current_map', currentMapIndex);
+            localStorage.setItem('homuty_v6_coins', totalCoins);
+            localStorage.setItem('homuty_v6_highscore', highScore);
+            localStorage.setItem('homuty_tutorial_done', tutorialShown);
+            localStorage.setItem('homuty_congrats_count', congratsCount);
+        }
+
+        function renderShop() {
+            shopItemsContainer.innerHTML = '';
+            if (activeShopTab === 'skins') {
+                skinsList.forEach(skin => {
+                    const isUnlocked = unlockedSkins.includes(skin.id);
+                    const isEquipped = currentSkin === skin.id;
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'shop-item';
+                    itemEl.innerHTML = `
+                        <div class="preview-box">
+                            <canvas class="preview-canvas" id="preview_skin_${skin.id}"></canvas>
+                        </div>
+                        <div class="shop-item-info">
+                            <h4>${skin.name}</h4>
+                            <p>${skin.desc}</p>
+                        </div>
+                        <div>
+                            ${isEquipped ? '<button class="item-action-btn equipped">АКТИВЕН</button>' :
+isUnlocked ? `<button class="item-action-btn" onclick="selectSkin('${skin.id}')">ВЫБРАТЬ</button>` : 
+                              `<button class="item-action-btn buy" onclick="buySkin('${skin.id}', ${skin.price})">💰 ${skin.price}</button>`}
+                        </div>
+                    `;
+                    shopItemsContainer.appendChild(itemEl);
+                });
+            } else {
+                colorThemes.forEach(map => {
+                    const isUnlocked = unlockedMaps.includes(map.id);
+                    const isEquipped = currentMapIndex === map.id;
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'shop-item';
+                    itemEl.innerHTML = `
+                        <div class="preview-box">
+                            <canvas class="preview-canvas" id="preview_map_${map.id}"></canvas>
+                        </div>
+                        <div class="shop-item-info">
+                            <h4>${map.name}</h4>
+                            <p>${map.isNeonRainbow ? 'Динамически меняет цвета' : 'Игровая локация'}</p>
+                        </div>
+                        <div>
+                            ${isEquipped ? '<button class="item-action-btn equipped">АКТИВНА</button>' : 
+                              isUnlocked ? `<button class="item-action-btn" onclick="selectMap(${map.id})">ВЫБРАТЬ</button>` : 
+                              `<button class="item-action-btn buy" onclick="buyMap(${map.id}, ${map.price})">💰 ${map.price}</button>`}
+                        </div>
+                    `;
+                    shopItemsContainer.appendChild(itemEl);
+                });
+            }
+        }
+
+        function renderLivePreviews() {
+            if (shopMenu.style.display === 'flex') {
+                if (activeShopTab === 'skins') {
+                    skinsList.forEach(skin => drawSkinPreview(skin.id));
+                } else {
+                    colorThemes.forEach(map => drawMapPreview(map));
+                }
+            }
+        }
+
+        function drawSkinPreview(skinId) {
+            const pCanvas = document.getElementById(`preview_skin_${skinId}`);
+            if (!pCanvas) return;
+            pCanvas.width = 60;
+            pCanvas.height = 60;
+            const pCtx = pCanvas.getContext('2d');
+            pCtx.clearRect(0, 0, 60, 60);
+
+            pCtx.save();
+            pCtx.translate(30, 30);
+            
+            let color = '#38bdf8';
+            if (skinId === 'rainbow') color = `hsl(${(Date.now() / 10) % 360}, 90%, 60%)`;
+            else if (skinId === 'gold') color = '#ffd700';
+            else if (skinId === 'void') color = '#a855f7';
+
+            pCtx.shadowBlur = 10;
+            pCtx.shadowColor = color;
+
+            pCtx.beginPath();
+            pCtx.arc(0, 0, 18, 0, Math.PI * 2);
+            pCtx.fillStyle = '#0b1329';
+            pCtx.fill();
+            pCtx.strokeStyle = color;
+            pCtx.lineWidth = 2.5;
+            pCtx.stroke();
+
+            pCtx.beginPath();
+            pCtx.arc(0, 0, 7, 0, Math.PI * 2);
+            pCtx.fillStyle = color;
+            pCtx.fill();
+
+            if (skinId === 'eyes') {
+                pCtx.fillStyle = '#ffffff';
+                pCtx.beginPath();
+                pCtx.arc(-4, -3, 2.5, 0, Math.PI * 2);
+                pCtx.arc(4, -3, 2.5, 0, Math.PI * 2);
+                pCtx.fill();
+                pCtx.fillStyle = '#030508';
+                pCtx.beginPath();
+                pCtx.arc(-4 + Math.sin(Date.now() / 200) * 0.8, -3, 1, 0, Math.PI * 2);
+                pCtx.arc(4 + Math.sin(Date.now() / 200) * 0.8, -3, 1, 0, Math.PI * 2);
+                pCtx.fill();
+            } else {
+                pCtx.beginPath();
+                pCtx.arc(-3, -3, 2, 0, Math.PI * 2);
+                pCtx.fillStyle = '#ffffff';
+                pCtx.fill();
+            }
+
+            pCtx.restore();
+        }
+
+        function drawMapPreview(map) {
+const pCanvas = document.getElementById(`preview_map_${map.id}`);
+            if (!pCanvas) return;
+            pCanvas.width = 60;
+            pCanvas.height = 60;
+            const pCtx = pCanvas.getContext('2d');
+            pCtx.clearRect(0, 0, 60, 60);
+
+            let primary = map.primary;
+            let obstacle = map.obstacle;
+
+            if (map.isNeonRainbow) {
+                let hue = (Date.now() / 25) % 360;
+                primary = `hsl(${hue}, 90%, 60%)`;
+                obstacle = `hsl(${(hue + 120) % 360}, 90%, 60%)`;
+            }
+
+            pCtx.fillStyle = map.darkBlock;
+            pCtx.fillRect(0, 0, 60, 60);
+
+            pCtx.shadowBlur = 8;
+            pCtx.shadowColor = obstacle;
+            pCtx.fillStyle = obstacle;
+            pCtx.fillRect(0, 0, 12, 60);
+            pCtx.fillRect(48, 0, 12, 60);
+
+            pCtx.fillStyle = primary;
+            pCtx.fillRect(5, 0, 2, 60);
+            pCtx.fillRect(51, 0, 2, 60);
+        }
+
+        window.selectSkin = function(id) { currentSkin = id; saveGameData(); renderShop(); }
+        window.buySkin = function(id, price) {
+            if (totalCoins >= price) { totalCoins -= price; unlockedSkins.push(id); currentSkin = id; updateWalletUI(); saveGameData(); renderShop(); }
+            else alert('Недостаточно монет!');
+        }
+        window.selectMap = function(id) { currentMapIndex = id; saveGameData(); renderShop(); }
+        window.buyMap = function(id, price) {
+            if (totalCoins >= price) { totalCoins -= price; unlockedMaps.push(id); currentMapIndex = id; updateWalletUI(); saveGameData(); renderShop(); }
+            else alert('Недостаточно монет!');
+        }
+
+        tabSkinsBtn.addEventListener('click', () => { activeShopTab = 'skins'; tabSkinsBtn.classList.add('active'); tabMapsBtn.classList.remove('active'); renderShop(); });
+        tabMapsBtn.addEventListener('click', () => { activeShopTab = 'maps'; tabMapsBtn.classList.add('active'); tabSkinsBtn.classList.remove('active'); renderShop(); });
+
+        backArrowShop.addEventListener('click', () => { shopMenu.style.display = 'none'; mainMenu.style.display = 'flex'; updateWalletUI(); });
+        backArrowSettings.addEventListener('click', () => { settingsMenu.style.display = 'none'; mainMenu.style.display = 'flex'; });
+
+        shopBtn.addEventListener('click', () => { mainMenu.style.display = 'none'; shopMenu.style.display = 'flex'; renderShop(); });
+        settingsBtn.addEventListener('click', () => { mainMenu.style.display = 'none'; settingsMenu.style.display = 'flex'; });
+
+        toggleMusicBtn.addEventListener('click', () => {
+            musicEnabled = !musicEnabled;
+            toggleMusicBtn.innerText = musicEnabled ? "МУЗЫКА: ВКЛ" : "МУЗЫКА: ВЫКЛ";
+            if (!musicEnabled) stopMusicEngine();
+        });
+
+        loadMusicBtn.addEventListener('click', () => { musicFileInput.click(); });
+        
+        musicFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                loadingOverlay.style.display = 'flex';
+
+                setTimeout(() => {
+                    customAudio.src = URL.createObjectURL(file);
+                    useCustomMusic = true;
+                    loadingOverlay.style.display = 'none';
+                    showToast("ТРЕК УСПЕШНО ЗАГРУЖЕН! 🎵", 3000);
+                }, 2000);
+            }
+        });
+
+        playBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            initAudio();
+            mainMenu.style.display = 'none';
+            uiOverlay.style.display = 'flex';
+            isAutoPlay = false; 
+            startGame();
+            startMelodyEngine();
+        });
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 256;
+dataArray = new Uint8Array(analyser.frequencyBinCount);
+            }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function setupCustomAudioNode() {
+            if (!sourceNode && customAudio) {
+                try {
+                    sourceNode = audioCtx.createMediaElementSource(customAudio);
+                    sourceNode.connect(analyser);
+                    analyser.connect(audioCtx.destination);
+                } catch(e) {}
+            }
+        }
+
+        function startMelodyEngine() {
+            stopMusicEngine();
+            if (!musicEnabled) return;
+            initAudio();
+            if (useCustomMusic) {
+                setupCustomAudioNode();
+                customAudio.currentTime = 0;
+                customAudio.play().catch(e => console.log(e));
+                return;
+            }
+
+            const scales = [
+                [220, 246.94, 261.63, 329.63, 392, 440],
+                [174.61, 196, 220, 261.63, 293.66],
+                [196, 220, 246.94, 293.66, 329.63]
+            ];
+            const bassScales = [110, 87.31, 98, 130.81];
+
+            let currentScale = scales[0];
+            let beatStep = 0;
+
+            melodyTimer = setInterval(() => {
+                if (!audioCtx || !musicEnabled) return;
+                let time = audioCtx.currentTime;
+
+                if (beatStep % 16 === 0) {
+                    currentScale = scales[Math.floor(Math.random() * scales.length)];
+                }
+
+                let bassNote = bassScales[Math.floor(beatStep / 8) % bassScales.length];
+                let leadNote = currentScale[Math.floor(Math.random() * currentScale.length)];
+
+                let bassOsc = audioCtx.createOscillator();
+                let bassGain = audioCtx.createGain();
+                bassOsc.type = 'sine';
+                bassOsc.frequency.setValueAtTime(bassNote, time);
+                bassGain.gain.setValueAtTime(0.04, time);
+                bassGain.gain.exponentialRampToValueAtTime(0.001, time + 0.3);
+                bassOsc.connect(bassGain);
+                bassGain.connect(audioCtx.destination);
+                bassOsc.start(time);
+                bassOsc.stop(time + 0.3);
+
+                if (beatStep % 2 === 0) {
+                    let leadOsc = audioCtx.createOscillator();
+                    let leadGain = audioCtx.createGain();
+                    leadOsc.type = 'triangle';
+                    leadOsc.frequency.setValueAtTime(leadNote, time);
+                    leadGain.gain.setValueAtTime(0.02, time);
+                    leadGain.gain.exponentialRampToValueAtTime(0.001, time + 0.2);
+                    leadOsc.connect(leadGain);
+                    leadGain.connect(audioCtx.destination);
+                    leadOsc.start(time);
+                    leadOsc.stop(time + 0.2);
+                }
+
+                if (beatStep % 4 === 0) {
+                    bassPulse = 1.0; 
+                    let kick = audioCtx.createOscillator();
+                    let kickGain = audioCtx.createGain();
+                    kick.type = 'sine';
+                    kick.frequency.setValueAtTime(65, time);
+                    kick.frequency.exponentialRampToValueAtTime(12, time + 0.2);
+                    kickGain.gain.setValueAtTime(0.08, time);
+                    kickGain.gain.exponentialRampToValueAtTime(0.001, time + 0.2);
+                    kick.connect(kickGain);
+                    kick.connect(audioCtx.destination);
+                    kick.start(time);
+                    kick.stop(time + 0.2);
+                }
+                beatStep++;
+            }, 160);
+        }
+
+        function stopMusicEngine() {
+            if (melodyTimer) { clearInterval(melodyTimer); melodyTimer = null; }
+            if (customAudio) { customAudio.pause(); customAudio.currentTime = 0; }
+        }
+
+        function playScoreSound() {
+            if (!audioCtx || !musicEnabled) return;
+            const osc = audioCtx.createOscillator();
+const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(659.25, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.08);
+        }
+
+        function playGameOverSound() {
+            if (!audioCtx || !musicEnabled) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(130, audioCtx.currentTime);
+            osc.frequency.linearRampToValueAtTime(30, audioCtx.currentTime + 0.35);
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.35);
+        }
+
+        const player = { x: 120, y: window.innerHeight / 2, radius: 20, targetY: window.innerHeight / 2 };
+        let obstacles = [];
+        let particles = [];
+        let frameCount = 0;
+        
+        let currentSpeed = 3.8;
+        const baseSpeed = 3.8;
+        const maxSpeed = 8.2;
+
+        canvas.addEventListener('mousemove', (e) => { if(!isAutoPlay) player.targetY = e.clientY; });
+        canvas.addEventListener('touchmove', (e) => { if(!isAutoPlay && e.touches.length > 0) player.targetY = e.touches[0].clientY; e.preventDefault(); }, { passive: false });
+        canvas.addEventListener('touchstart', (e) => { if(!isAutoPlay && e.touches.length > 0) player.targetY = e.touches[0].clientY; e.preventDefault(); }, { passive: false });
+
+        function startGame() {
+            score = 0;
+            scoreVal.innerText = score;
+            obstacles = [];
+            particles = [];
+            player.y = window.innerHeight / 2;
+            player.targetY = window.innerHeight / 2;
+            frameCount = 0;
+            currentSpeed = baseSpeed;
+            milestoneShownThisRun = false;
+            gameRunning = true;
+            bassCircleIntro = 1.0; 
+
+            if (!tutorialShown) {
+                tutorialShown = true;
+                saveGameData();
+                showToast("УПРАВЛЕНИЕ: Веди пальцем или мышкой вверх и вниз!", 3500);
+            }
+        }
+
+        function spawnExplosion(x, y, color) {
+            for(let i = 0; i < 30; i++) {
+                let angle = Math.random() * Math.PI * 2;
+                let speed = Math.random() * 5 + 1.5;
+                particles.push({
+                    x: x, y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    size: Math.random() * 4 + 1.5,
+                    alpha: 1.0,
+                    color: color,
+                    decay: Math.random() * 0.03 + 0.02
+                });
+            }
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            stopMusicEngine();
+            gameToast.classList.remove('active');
+            spawnExplosion(player.x, player.y, getCurrentTheme().primary);
+            playGameOverSound();
+
+            let earnedCoins = score;
+            let bonusCoins = Math.floor(score / 50) * 20;
+            let totalEarned = earnedCoins + bonusCoins;
+
+            totalCoins += totalEarned;
+            if (score > highScore) { highScore = score; highScoreVal.innerText = highScore; }
+            updateWalletUI();
+            
+            setTimeout(() => {
+                uiOverlay.style.display = 'none';
+                mainMenu.style.display = 'flex';
+                isAutoPlay = true; 
+                obstacles = [];
+playBtn.innerText = 'ИГРАТЬ СНОВА';
+            }, 550);
+        }
+
+        function spawnObstacle() {
+            const gapHeights = [165, 180, 200];
+            const gapHeight = gapHeights[Math.floor(Math.random() * gapHeights.length)];
+            const minPos = 50;
+            const maxPos = canvas.height - 50 - gapHeight;
+            const gapY = Math.random() * (maxPos - minPos) + minPos;
+            const widths = [28, 34, 40];
+            const width = widths[Math.floor(Math.random() * widths.length)];
+
+            obstacles.push({ x: canvas.width, width: width, topHeight: gapY, bottomY: gapY + gapHeight, bottomHeight: canvas.height - (gapY + gapHeight), passed: false });
+        }
+
+        function getCurrentTheme() {
+            let baseTheme = colorThemes[currentMapIndex] || colorThemes[0];
+            if (baseTheme.isNeonRainbow) {
+                let timeCycle = (Date.now() / 28) % 360;
+                return {
+                    primary: `hsl(${timeCycle}, 95%, 60%)`,
+                    obstacle: `hsl(${(timeCycle + 120) % 360}, 95%, 60%)`,
+                    darkBlock: '#0b0818'
+                };
+            }
+            return baseTheme;
+        }
+
+        function update() {
+            renderLivePreviews();
+
+            if (bassCircleIntro > 0) {
+                bassCircleIntro -= 0.005;
+                if (bassCircleIntro < 0) bassCircleIntro = 0;
+            }
+
+            if (analyser && musicEnabled && ((useCustomMusic && !customAudio.paused) || !useCustomMusic)) {
+                analyser.getByteFrequencyData(dataArray);
+                let bassSum = 0;
+                for(let i = 0; i < 8; i++) bassSum += dataArray[i];
+                let bassAvg = bassSum / 8;
+                if (bassAvg > 90) {
+                    let calculatedPulse = (bassAvg - 90) / 165;
+                    bassPulse = Math.max(bassPulse, calculatedPulse);
+                }
+            }
+
+            if (bassPulse > 0) { 
+                bassPulse -= 0.06; 
+                if (bassPulse < 0) bassPulse = 0; 
+            }
+
+            if (mainMenu.style.display !== 'none') {
+                menuTitle.style.transform = `scale(${1 + bassPulse * 0.08})`;
+            }
+
+            stars.forEach(star => {
+                star.x -= star.speed * (gameRunning ? (currentSpeed / baseSpeed) : 1);
+                if (star.x < 0) star.x = canvas.width;
+                star.alpha += Math.sin(frameCount * star.twinkleSpeed) * 0.02;
+                if (star.alpha < 0.2) star.alpha = 0.2;
+                if (star.alpha > 1) star.alpha = 1;
+            });
+
+            particles.forEach((p, index) => {
+                if (p.vx !== undefined) {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.alpha -= p.decay;
+                } else {
+                    p.x += p.speedX;
+                    p.alpha -= 0.025;
+                }
+                if (p.alpha <= 0) particles.splice(index, 1);
+            });
+
+            frameCount++;
+            
+            if (isAutoPlay) {
+                player.targetY = canvas.height / 2 + Math.sin(frameCount / 25) * 80;
+                player.y += (player.targetY - player.y) * 0.08;
+
+                if (frameCount % 3 === 0) {
+                    let theme = getCurrentTheme();
+                    particles.push({ x: player.x - 14, y: player.y + (Math.random() * 14 - 7), size: Math.random() * 2.5 + 1.5, speedX: -3.5 - Math.random() * 1.5, alpha: 0.85, color: theme.primary });
+                }
+                return;
+            }
+
+            if (!gameRunning) return;
+
+            if (currentSpeed < maxSpeed) {
+                currentSpeed += 0.0012;
+            }
+
+            player.y += (player.targetY - player.y) * 0.18;
+            if (player.y < player.radius) player.y = player.radius;
+            if (player.y > canvas.height - player.radius) player.y = canvas.height - player.radius;
+
+            let spawnRate = Math.max(55, Math.floor(85 - (currentSpeed * 4)));
+if (frameCount % spawnRate === 0) spawnObstacle();
+
+            if (frameCount % 3 === 0) {
+                let theme = getCurrentTheme();
+                particles.push({ x: player.x - 14, y: player.y + (Math.random() * 14 - 7), size: Math.random() * 2.5 + 1.5, speedX: -3.5 - Math.random() * 1.5, alpha: 0.85, color: theme.primary });
+            }
+
+            obstacles.forEach((obs, index) => {
+                obs.x -= currentSpeed;
+                if (player.x + player.radius > obs.x && player.x - player.radius < obs.x + obs.width) {
+                    if (player.y - player.radius < obs.topHeight || player.y + player.radius > obs.bottomY) gameOver();
+                }
+
+                if (!obs.passed && obs.x + obs.width < player.x) { 
+                    obs.passed = true; 
+                    score += 10; 
+                    scoreVal.innerText = score; 
+                    playScoreSound(); 
+
+                    if (score >= 50 && !milestoneShownThisRun && congratsCount < 10) {
+                        milestoneShownThisRun = true;
+                        congratsCount++;
+                        saveGameData();
+                        showToast("МОЛОДЕЦ! 🚀 Отличный результат!", 2500);
+                    }
+                }
+                if (obs.x + obs.width < 0) obstacles.splice(index, 1);
+            });
+        }
+
+        function drawPerfectStraightObstacle(obs, isTop, theme) {
+            let x = obs.x;
+            let y = isTop ? 0 : obs.bottomY;
+            let w = obs.width;
+            let h = isTop ? obs.topHeight : obs.bottomHeight;
+
+            ctx.save();
+            ctx.shadowBlur = 18;
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.85)';
+
+            ctx.fillStyle = theme.darkBlock;
+            ctx.fillRect(x, y, w, h);
+
+            ctx.strokeStyle = theme.obstacle;
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, w, h);
+
+            ctx.fillStyle = theme.primary;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = theme.primary;
+            ctx.globalAlpha = 0.9;
+            ctx.fillRect(x + w / 2 - 1.5, y + (isTop ? 15 : 0), 3, h - 30);
+            ctx.globalAlpha = 1.0;
+
+            ctx.strokeStyle = theme.primary;
+            ctx.lineWidth = 1;
+            let step = 26;
+            let startOffset = (y % step);
+            for (let currentY = y + startOffset; currentY < y + h; currentY += step) {
+                if (currentY > y + 5 && currentY < y + h - 5) {
+                    ctx.beginPath();
+                    ctx.moveTo(x + 3, currentY);
+                    ctx.lineTo(x + w - 3, currentY);
+                    ctx.stroke();
+                }
+            }
+            ctx.restore();
+        }
+
+        function draw() {
+            let theme = getCurrentTheme();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.save();
+            ctx.strokeStyle = theme.primary;
+            ctx.globalAlpha = 0.04 + bassPulse * 0.05;
+            ctx.lineWidth = 1;
+
+            let gridSpacing = 50;
+            let gridOffsetX = (frameCount * (currentSpeed * 0.5)) % gridSpacing;
+
+            for (let x = -gridOffsetX; x < canvas.width; x += gridSpacing) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += gridSpacing) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+            }
+            ctx.restore();
+
+            stars.forEach(star => {
+                ctx.fillStyle = theme.primary;
+                ctx.globalAlpha = star.alpha;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // КРУГ БАСОВ (БЕЛАЯ ВСПЫШКА В НАЧАЛЕ -> ПРОЗРАЧНАЯ СЕРДЦЕВИНА + ОБОДОК)
+            ctx.save();
+            let centerX = canvas.width / 2;
+            let centerY = canvas.height / 2;
+let baseRadius = Math.min(canvas.width, canvas.height) * 0.44;
+            let pulseOffset = bassPulse * 40;
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, baseRadius + pulseOffset, 0, Math.PI * 2);
+
+            if (bassCircleIntro > 0.01) {
+                ctx.fillStyle = `rgba(255, 255, 255, ${bassCircleIntro * 0.85})`;
+                ctx.fill();
+            } else {
+                ctx.fillStyle = theme.darkBlock;
+                ctx.globalAlpha = 0.2 + bassPulse * 0.2;
+                ctx.fill();
+            }
+
+            ctx.lineWidth = 3 + bassPulse * 5;
+            ctx.strokeStyle = '#ffffff';
+            ctx.shadowColor = '#ffffff';
+            ctx.shadowBlur = 18 + bassPulse * 25;
+            ctx.globalAlpha = 0.25 + bassCircleIntro * 0.75 + bassPulse * 0.5;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, baseRadius + pulseOffset + 4, 0, Math.PI * 2);
+            ctx.strokeStyle = theme.primary;
+            ctx.lineWidth = 2;
+            ctx.globalAlpha = 0.3 + bassPulse * 0.4;
+            ctx.stroke();
+
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            let textScale = 1 + bassPulse * 0.1;
+            ctx.scale(textScale, textScale);
+            ctx.font = `900 ${Math.min(canvas.width, canvas.height) * 0.12}px 'Segoe UI', sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = theme.primary;
+            ctx.globalAlpha = 0.03 + bassPulse * 0.08;
+            ctx.fillText("HOMUTY", 0, 0);
+            ctx.restore();
+            ctx.restore();
+
+            particles.forEach(p => {
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.alpha;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+            });
+
+            if (!isAutoPlay) {
+                obstacles.forEach(obs => {
+                    drawPerfectStraightObstacle(obs, true, theme);
+                    drawPerfectStraightObstacle(obs, false, theme);
+                });
+            }
+
+            if (gameRunning || isAutoPlay) {
+                ctx.save();
+                ctx.translate(player.x, player.y);
+                
+                ctx.shadowBlur = 25;
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+
+                let primaryColor = theme.primary;
+                if (currentSkin === 'rainbow') primaryColor = `hsl(${(frameCount * 4) % 360}, 90%, 60%)`;
+                else if (currentSkin === 'gold') primaryColor = '#ffd700';
+                else if (currentSkin === 'void') primaryColor = '#a855f7';
+
+                let playerScale = 1 + bassPulse * 0.12;
+                ctx.scale(playerScale, playerScale);
+
+                ctx.beginPath();
+                ctx.arc(0, 0, player.radius + 3, 0, Math.PI * 2);
+                ctx.strokeStyle = theme.obstacle;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.arc(0, 0, player.radius, 0, Math.PI * 2);
+                ctx.fillStyle = theme.darkBlock;
+                ctx.fill();
+                ctx.strokeStyle = primaryColor;
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.arc(0, 0, player.radius * 0.45, 0, Math.PI * 2);
+                ctx.fillStyle = primaryColor;
+                ctx.globalAlpha = 0.85;
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+
+                if (currentSkin === 'eyes') {
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath();
+                    ctx.arc(-4, -4, 3, 0, Math.PI * 2); ctx.arc(4, -4, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#030508';
+ctx.beginPath();
+                    ctx.arc(-4 + Math.sin(frameCount / 10) * 0.8, -4, 1.2, 0, Math.PI * 2);
+                    ctx.arc(4 + Math.sin(frameCount / 10) * 0.8, -4, 1.2, 0, Math.PI * 2);
+                    ctx.fill();
+                } else if (currentSkin === 'void') {
+                    ctx.strokeStyle = '#c084fc';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, player.radius * 0.75, 0, Math.PI * 2);
+                    ctx.stroke();
+                } else if (currentSkin === 'plasma') {
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(-player.radius * 0.5, -player.radius * 0.3);
+                    ctx.lineTo(0, 0);
+                    ctx.lineTo(player.radius * 0.5, player.radius * 0.3);
+                    ctx.stroke();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(-2.5, -2.5, player.radius * 0.15, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fill();
+                }
+
+                ctx.restore();
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        resizeCanvas();
+        requestAnimationFrame(gameLoop);
+    </script>
+</body>
+</html>
