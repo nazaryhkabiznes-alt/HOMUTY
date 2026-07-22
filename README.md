@@ -1,2 +1,2 @@
 # HOMUTY
-Parkour Mario game
+Parkour game
