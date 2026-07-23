@@ -39,7 +39,7 @@
             object-fit: cover;
         }
 
-        /* ЭКРАН ЗАГРУЗКИ */
+        /* ЭКРАН ЗАГРУЗКИ ПРИЛОЖЕНИЯ */
         .app-splash-screen {
             position: absolute;
             top: 0;
@@ -52,7 +52,25 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.6s ease;
+        }
+        .splash-icon-preview {
+            width: 90px;
+            height: 90px;
+            border-radius: 24px;
+            background: #0b1329;
+            border: 2px solid #38bdf8;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .splash-icon-preview canvas {
+            width: 100%;
+            height: 100%;
         }
         .splash-title {
             font-size: 42px;
@@ -61,7 +79,7 @@
             background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.4));
         }
         .splash-progress-bg {
@@ -79,7 +97,105 @@
             height: 100%;
             background: linear-gradient(90deg, #38bdf8, #818cf8);
             box-shadow: 0 0 12px #38bdf8;
-            transition: width 0.05s linear;
+            transition: width 0.02s linear;
+        }
+
+        /* ПОПАП УСПЕШНОЙ ПОКУПКИ ИЛИ ПОЛУЧЕНИЯ НАГРАДЫ */
+        .purchase-modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 3, 5, 0.75);
+            backdrop-filter: blur(8px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 120;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .purchase-modal.active {
+            opacity: 1;
+        }
+        .purchase-box {
+            background: linear-gradient(135deg, #0b1329, #172554);
+            border: 2px solid #38bdf8;
+            border-radius: 30px;
+            padding: 30px 25px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(56, 189, 248, 0.6);
+display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .purchase-modal.active .purchase-box {
+            transform: scale(1);
+        }
+        .purchase-icon-preview {
+            width: 75px;
+            height: 75px;
+            background: #020305;
+            border-radius: 20px;
+            border: 1px solid #38bdf8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            font-size: 32px;
+        }
+        .purchase-box h3 {
+            font-size: 20px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+        .purchase-box p {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        /* МИНИ-ОКНО ЗАГРУЗКИ ТОЛЬКО ДЛЯ КАЛЕНДАРЯ */
+        .screen-loader-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 5, 8, 0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 110;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .screen-loader-overlay.active {
+            opacity: 1;
+        }
+        .screen-loader-spinner {
+            width: 45px;
+            height: 45px;
+            border: 4px solid rgba(56, 189, 248, 0.2);
+            border-top: 4px solid #38bdf8;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 12px;
+        }
+        .screen-loader-text {
+            font-size: 13px;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 2px;
         }
 
         .ui-overlay {
@@ -131,7 +247,7 @@
         }
 
         .loading-overlay {
-position: absolute;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -147,7 +263,7 @@ position: absolute;
         .loading-box {
             background: #0b1329;
             border: 1px solid #38bdf8;
-            padding: 25px 35px;
+padding: 25px 35px;
             border-radius: 20px;
             box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
             text-align: center;
@@ -241,21 +357,21 @@ position: absolute;
             margin-top: 3px;
         }
 
-        /* ЭКРАН КАЛЕНДАРЯ НАГРАД */
+        /* КАЛЕНДАРЬ НАГРАД (20 ДНЕЙ) */
         .calendar-screen {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 5, 8, 0.96);
+            background: radial-gradient(circle at center, #0b1329 0%, #030508 100%);
             backdrop-filter: blur(18px);
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             z-index: 25;
-            padding: 25px 20px;
+            padding: 25px 15px;
             overflow-y: auto;
             touch-action: pan-y;
             opacity: 0;
@@ -267,85 +383,131 @@ position: absolute;
             transform: scale(1);
         }
         .calendar-screen h2 {
-font-size: 24px;
+            font-size: 26px;
             font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 8px;
-            margin-top: 15px;
+            background: linear-gradient(135deg, #f472b6, #c084fc, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+            margin-top: 10px;
             letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+            text-align: center;
+            filter: drop-shadow(0 0 15px rgba(244, 114, 182, 0.4));
         }
-        .calendar-grid {
+.calendar-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 9px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
             width: 100%;
-            max-width: 460px;
+            max-width: 440px;
             margin-top: 15px;
             margin-bottom: 30px;
         }
         .cal-item {
-            aspect-ratio: 0.85;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(99, 102, 241, 0.15));
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 12px;
+            aspect-ratio: 0.82;
+            background: rgba(11, 19, 41, 0.65);
+            border: 2px solid rgba(56, 189, 248, 0.25);
+            border-radius: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 6px 4px;
+            padding: 10px 6px;
             position: relative;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cal-item:active {
+            transform: scale(0.94);
         }
         .cal-item.ready {
             border-color: #38bdf8;
-            box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(129, 140, 248, 0.35));
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.7);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.3));
             animation: pulseCard 1.5s infinite alternate;
         }
         @keyframes pulseCard {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.06); }
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }
+            100% { transform: scale(1.05); box-shadow: 0 0 30px rgba(56, 189, 248, 0.85); }
         }
         .cal-item.claimed {
-            opacity: 0.5;
+            opacity: 0.65;
             border-color: #10b981;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.2));
+            background: rgba(16, 185, 129, 0.12);
             cursor: default;
         }
         .cal-item.locked {
             opacity: 0.35;
             cursor: not-allowed;
             filter: grayscale(0.8);
-            background: rgba(255, 255, 255, 0.02);
             border-color: rgba(255, 255, 255, 0.08);
         }
-        .cal-item.legendary-day {
-            grid-column: span 2;
-            border-color: #fbbf24;
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(239, 68, 68, 0.3));
-            box-shadow: 0 0 25px rgba(251, 191, 36, 0.6);
+        .cal-item.megapack-day {
+            grid-column: span 4;
+            aspect-ratio: 2.8;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(168, 85, 247, 0.4), rgba(56, 189, 248, 0.3));
+            border: 2px solid #ec4899;
+            box-shadow: 0 0 35px rgba(236, 72, 153, 0.6);
+            flex-direction: row;
+            padding: 15px 20px;
+            align-items: center;
+        }
+        .cal-item.megapack-day.ready {
+            animation: pulseMega 1.5s infinite alternate;
+        }
+        @keyframes pulseMega {
+            0% { transform: scale(1); box-shadow: 0 0 25px rgba(236, 72, 153, 0.6); }
+            100% { transform: scale(1.03); box-shadow: 0 0 45px rgba(236, 72, 153, 0.9); }
         }
         .cal-day-num {
-            font-size: 9px;
-            font-weight: 800;
+            font-size: 11px;
+            font-weight: 900;
             color: #94a3b8;
             align-self: flex-start;
         }
         .cal-item.ready .cal-day-num { color: #38bdf8; }
-        .cal-item.legendary-day .cal-day-num { color: #fbbf24; }
+        .cal-item.claimed .cal-day-num { color: #10b981; }
+        .cal-item.megapack-day .cal-day-num { align-self: flex-start; font-size: 13px; color: #f472b6; }
+        
         .cal-item-icon {
-            font-size: 18px;
+            font-size: 26px;
             margin: auto 0;
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.4));
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
+            animation: floatIcon 2.5s ease-in-out infinite alternate;
+        }
+        @keyframes floatIcon {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-4px); }
+        }
+        .megapack-day .cal-item-icon {
+            font-size: 44px;
+            margin: 0 20px;
+        }
+        .megapack-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            flex-grow: 1;
         }
         .cal-item-desc {
-            font-size: 8px;
-            font-weight: 800;
+            font-size: 10px;
+            font-weight: 900;
             color: #ffffff;
             text-align: center;
-            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        .cal-item.claimed .cal-item-desc {
+            color: #34d399;
+            font-size: 11px;
+        }
+        .megapack-info .cal-item-desc {
+            font-size: 15px;
+            background: linear-gradient(135deg, #f472b6, #fbbf24);
+-webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 2px;
         }
 
         /* ГЛАВНОЕ МЕНЮ */
@@ -384,7 +546,8 @@ font-size: 24px;
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-.wallet-display {
+
+        .wallet-display {
             background: rgba(251, 191, 36, 0.15);
             border: 1px solid rgba(251, 191, 36, 0.4);
             padding: 8px 22px;
@@ -473,7 +636,7 @@ font-size: 24px;
         }
         .results-stat-row {
             display: flex;
-            justify-content: space-between;
+justify-content: space-between;
             align-items: center;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -519,7 +682,7 @@ font-size: 24px;
         
         .shop-tabs {
             display: flex;
-gap: 12px;
+            gap: 12px;
             margin-bottom: 20px;
         }
         .tab-btn {
@@ -608,13 +771,19 @@ gap: 12px;
             color: #64748b;
             cursor: default;
         }
+        .item-action-btn.purchased {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            color: #34d399;
+            cursor: default;
+        }
         .item-action-btn.buy {
             background: #fbbf24;
             color: #030508;
         }
 
         .setting-item {
-            margin-bottom: 16px;
+margin-bottom: 16px;
             width: 260px;
             display: flex;
             flex-direction: column;
@@ -636,10 +805,30 @@ gap: 12px;
     <audio id="customAudio" crossorigin="anonymous" loop></audio>
 
     <div class="game-container">
+        <!-- ЭКРАН ЗАГРУЗКИ ПРИЛОЖЕНИЯ -->
         <div class="app-splash-screen" id="appSplashScreen">
+            <div class="splash-icon-preview">
+                <canvas id="splashCanvas" width="90" height="90"></canvas>
+            </div>
             <div class="splash-title">HOMUTY</div>
             <div class="splash-progress-bg">
                 <div class="splash-progress-fill" id="splashFill"></div>
+            </div>
+        </div>
+
+        <!-- ТОЛЬКО ДЛЯ КАЛЕНДАРЯ: МИНИ-ОКНО ЗАГРУЗКИ -->
+        <div class="screen-loader-overlay" id="screenLoaderOverlay">
+            <div class="screen-loader-spinner"></div>
+            <div class="screen-loader-text" id="screenLoaderText">ЗАГРУЗКА...</div>
+        </div>
+
+        <!-- ПОПАП УСПЕШНОЙ ПОКУПКИ -->
+        <div class="purchase-modal" id="purchaseModal">
+            <div class="purchase-box">
+                <div class="purchase-icon-preview" id="purchaseModalIcon">🎁</div>
+                <h3>УСПЕШНО!</h3>
+                <p id="purchaseModalText">Предмет успешно добавлен в инвентарь</p>
+                <button class="btn" id="purchaseModalCloseBtn" style="width: 100%; margin-top: 5px;">ОК</button>
             </div>
         </div>
 
@@ -661,10 +850,10 @@ gap: 12px;
         <div class="menu-screen" id="mainMenu">
             <div class="calendar-btn" id="calendarBtn">
                 <div class="cal-grid-icon">
-<div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+                    <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
                     <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
                 </div>
-                <div class="cal-badge" id="calBadge">0/30</div>
+                <div class="cal-badge" id="calBadge">0/20</div>
             </div>
 
             <h1 id="menuTitle">HOMUTY</h1>
@@ -676,7 +865,7 @@ gap: 12px;
             </div>
         </div>
 
-        <!-- ЭКРАН КАЛЕНДАРЯ НАГРАД -->
+        <!-- КАЛЕНДАРЬ НАГРАД (20 ДНЕЙ) -->
         <div class="calendar-screen" id="calendarScreen">
             <div class="back-arrow-btn" id="backArrowCalendar">←</div>
             <h2>ЕЖЕДНЕВНЫЕ НАГРАДЫ</h2>
@@ -692,7 +881,7 @@ gap: 12px;
                     <span>НАБРАНО ОЧКОВ:</span>
                     <span class="results-stat-val" id="resScoreVal">0</span>
                 </div>
-                <div class="results-stat-row">
+<div class="results-stat-row">
                     <span>ЗАРАБОТАНО:</span>
                     <span class="results-stat-val coins-earned-val" id="resCoinsVal">+0 💰</span>
                 </div>
@@ -737,23 +926,125 @@ gap: 12px;
     </div>
 
     <script>
+        const splashCanvas = document.getElementById('splashCanvas');
+        const sCtx = splashCanvas.getContext('2d');
+        let splashAnimFrame = 0;
+
+        function renderSplashIconAnimation() {
+            splashAnimFrame++;
+            sCtx.clearRect(0, 0, 90, 90);
+            sCtx.save();
+            sCtx.translate(45, 45);
+
+            let hover = Math.sin(splashAnimFrame * 0.1) * 3;
+            sCtx.translate(0, hover);
+
+            sCtx.fillStyle = '#38bdf8';
+            sCtx.beginPath();
+            sCtx.ellipse(0, 6, 26, 11, 0, 0, Math.PI * 2);
+            sCtx.fill();
+            sCtx.strokeStyle = '#ffffff';
+            sCtx.lineWidth = 1.5;
+            sCtx.stroke();
+
+            sCtx.fillStyle = '#0284c7';
+            sCtx.beginPath();
+            sCtx.ellipse(3, 13, 8, 16, -Math.PI / 4, 0, Math.PI * 2);
+            sCtx.fill();
+            sCtx.stroke();
+
+            sCtx.fillStyle = '#1e293b';
+            sCtx.beginPath();
+            sCtx.arc(-2, -7, 12, 0, Math.PI * 2);
+            sCtx.fill();
+
+            sCtx.fillStyle = '#ffffff';
+            sCtx.beginPath();
+            sCtx.arc(-1, -5, 8.5, 0, Math.PI * 2);
+            sCtx.fill();
+
+            sCtx.fillStyle = '#ffffff';
+            sCtx.beginPath();
+            sCtx.arc(3, -11, 3.5, 0, Math.PI * 2);
+            sCtx.fill();
+            sCtx.fillStyle = '#000000';
+            sCtx.beginPath();
+            sCtx.arc(4, -11, 1.4, 0, Math.PI * 2);
+            sCtx.fill();
+
+            sCtx.fillStyle = '#f97316';
+            sCtx.beginPath();
+            sCtx.moveTo(6, -8);
+            sCtx.lineTo(13, -7);
+            sCtx.lineTo(6, -5);
+            sCtx.fill();
+
+            sCtx.strokeStyle = '#cbd5e1';
+            sCtx.lineWidth = 3.5;
+            sCtx.beginPath();
+            let pSpread = (splashAnimFrame % 6 < 3) ? 16 : 6;
+            sCtx.moveTo(26, 6 - pSpread);
+            sCtx.lineTo(26, 6 + pSpread);
+            sCtx.stroke();
+
+            sCtx.restore();
+            requestAnimationFrame(renderSplashIconAnimation);
+}
+        renderSplashIconAnimation();
+
         const splashScreen = document.getElementById('appSplashScreen');
         const splashFill = document.getElementById('splashFill');
         
         let splashProgress = 0;
         const splashInterval = setInterval(() => {
-            splashProgress += 4;
+            splashProgress += 2.5; 
             if (splashProgress > 100) splashProgress = 100;
             splashFill.style.width = splashProgress + '%';
             
             if (splashProgress >= 100) {
-clearInterval(splashInterval);
+                clearInterval(splashInterval);
                 setTimeout(() => {
                     splashScreen.style.opacity = '0';
-                    setTimeout(() => { splashScreen.style.display = 'none'; }, 500);
+                    setTimeout(() => { splashScreen.style.display = 'none'; }, 600);
                 }, 150);
             }
-        }, 60);
+        }, 50);
+
+        const screenLoaderOverlay = document.getElementById('screenLoaderOverlay');
+        const screenLoaderText = document.getElementById('screenLoaderText');
+
+        function showScreenLoader(text, callback) {
+            screenLoaderText.innerText = text;
+            screenLoaderOverlay.style.display = 'flex';
+            setTimeout(() => {
+                screenLoaderOverlay.classList.add('active');
+            }, 10);
+
+            setTimeout(() => {
+                screenLoaderOverlay.classList.remove('active');
+                setTimeout(() => {
+                    screenLoaderOverlay.style.display = 'none';
+                    if (callback) callback();
+                }, 250);
+            }, 1800);
+        }
+
+        const purchaseModal = document.getElementById('purchaseModal');
+        const purchaseModalIcon = document.getElementById('purchaseModalIcon');
+        const purchaseModalText = document.getElementById('purchaseModalText');
+        const purchaseModalCloseBtn = document.getElementById('purchaseModalCloseBtn');
+
+        function showPurchasePopup(iconSymbol, titleText, descText) {
+            purchaseModalIcon.innerText = iconSymbol;
+            purchaseModalText.innerHTML = `<b>${titleText}</b><br>${descText}`;
+            purchaseModal.style.display = 'flex';
+            setTimeout(() => { purchaseModal.classList.add('active'); }, 10);
+        }
+
+        purchaseModalCloseBtn.addEventListener('click', () => {
+            purchaseModal.classList.remove('active');
+            setTimeout(() => { purchaseModal.style.display = 'none'; }, 300);
+        });
 
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
@@ -786,7 +1077,7 @@ clearInterval(splashInterval);
         const resCoinsVal = document.getElementById('resCoinsVal');
         const calBadge = document.getElementById('calBadge');
         const calendarGridContainer = document.getElementById('calendarGridContainer');
-        const calTimerStatus = document.getElementById('calTimerStatus');
+const calTimerStatus = document.getElementById('calTimerStatus');
 
         const toggleMusicBtn = document.getElementById('toggleMusicBtn');
         const loadMusicBtn = document.getElementById('loadMusicBtn');
@@ -820,24 +1111,34 @@ clearInterval(splashInterval);
         let currentMapIndex = parseInt(localStorage.getItem('homuty_v6_current_map')) || 0;
 
         let claimedCalDays = parseInt(localStorage.getItem('homuty_claimed_cal_days')) || 0;
-let lastCalClaimTime = parseInt(localStorage.getItem('homuty_last_cal_claim_time')) || 0;
+        let lastCalClaimTime = parseInt(localStorage.getItem('homuty_last_cal_claim_time')) || 0;
+        let isClaimingInProgress = false;
 
-        const calendar30Data = [];
-        for (let i = 1; i <= 30; i++) {
-            if (i === 30) {
-                calendar30Data.push({ day: 30, type: 'legendary', coins: 15000, skin: 'cal_legendary_penguin', map: 7, desc: 'УЛЬТРА ЛЕГЕНДАРНЫЙ НАБОР' });
-            } else if (i === 10) {
-                calendar30Data.push({ day: 10, type: 'skin', skin: 'cal_rare_penguin1', coins: 1000, desc: 'Редкий Скин' });
-            } else if (i === 20) {
-                calendar30Data.push({ day: 20, type: 'map', map: 6, coins: 2000, desc: 'Редкая Карта' });
-            } else {
-                let coinReward = i * 120 + 80;
-                calendar30Data.push({ day: i, type: 'coins', coins: coinReward, desc: `+${coinReward} 💰` });
-            }
-        }
+        const calendar20Data = [
+            { day: 1, type: 'coins', coins: 150, desc: '+150 💰' },
+            { day: 2, type: 'skin', skin: 'cal_cyber_pilot', coins: 0, desc: 'Кибер-Пилот' },
+            { day: 3, type: 'coins', coins: 300, desc: '+300 💰' },
+            { day: 4, type: 'map', map: 9, coins: 0, desc: 'Карта: Неоновый Сферариум' },
+            { day: 5, type: 'coins', coins: 500, desc: '+500 💰' },
+            { day: 6, type: 'skin', skin: 'cal_neon_phantom', coins: 0, desc: 'Неоновый Фантом' },
+            { day: 7, type: 'coins', coins: 750, desc: '+750 💰' },
+            { day: 8, type: 'map', map: 10, coins: 0, desc: 'Карта: Кристальный Каньон' },
+            { day: 9, type: 'coins', coins: 1000, desc: '+1000 💰' },
+            { day: 10, type: 'skin', skin: 'cal_stellar_ace', coins: 0, desc: 'Звездный Ас' },
+            { day: 11, type: 'coins', coins: 1200, desc: '+1200 💰' },
+            { day: 12, type: 'map', map: 11, coins: 0, desc: 'Карта: Голографический Город' },
+            { day: 13, type: 'coins', coins: 1500, desc: '+1500 💰' },
+            { day: 14, type: 'skin', skin: 'cal_solar_glider', coins: 0, desc: 'Солнечный Планер' },
+            { day: 15, type: 'coins', coins: 2000, desc: '+2000 💰' },
+            { day: 16, type: 'map', map: 12, coins: 0, desc: 'Карта: Затерянное Измерение' },
+            { day: 17, type: 'coins', coins: 2500, desc: '+2500 💰' },
+            { day: 18, type: 'skin', skin: 'cal_quantum_bird', coins: 0, desc: 'Квантовый Пингвин' },
+            { day: 19, type: 'coins', coins: 3500, desc: '+3500 💰' },
+            { day: 20, type: 'megapack', coins: 5000, skin: 'cal_mega_king', map: 13, desc: 'МЕГАКОМПЛЕКТ: Скин Радужный Кинг + Локация «Радужные Кристаллы Космоса»!' }
+        ];
 
         let activeShopTab = 'skins';
-        let musicEnabled = true;
+let musicEnabled = true;
         let useCustomMusic = false;
 
         let audioCtx = null;
@@ -873,8 +1174,13 @@ let lastCalClaimTime = parseInt(localStorage.getItem('homuty_last_cal_claim_time
             { id: 3, name: 'Синтвейв Пурпур', price: 1800, primary: '#ec4899', obstacle: '#f472b6', darkBlock: '#290b21' },
             { id: 4, name: 'Золотой Дворец', price: 3000, primary: '#eab308', obstacle: '#facc15', darkBlock: '#29230b' },
             { id: 5, name: 'Тёмная Бездна', price: 4500, primary: '#a855f7', obstacle: '#c084fc', darkBlock: '#1a0b29' },
-            { id: 6, name: 'Неоновый Спектр (Редкая)', price: 99999, primary: '#ff007f', obstacle: '#00f0ff', darkBlock: '#120b29' },
-            { id: 7, name: 'Космический Легендарный', price: 99999, primary: '#fbbf24', obstacle: '#ef4444', darkBlock: '#180d08' }
+            { id: 6, name: 'Неоновый Спектр', price: 99999, primary: '#ff007f', obstacle: '#00f0ff', darkBlock: '#120b29' },
+            { id: 7, name: 'Космический Легендарный', price: 99999, primary: '#fbbf24', obstacle: '#ef4444', darkBlock: '#180d08' },
+            { id: 9, name: 'Неоновый Сферариум', price: 99999, primary: '#00ffcc', obstacle: '#ff00aa', darkBlock: '#091529' },
+            { id: 10, name: 'Кристальный Каньон', price: 99999, primary: '#38bdf8', obstacle: '#a855f7', darkBlock: '#0d0b29' },
+            { id: 11, name: 'Голографический Город', price: 99999, primary: '#ec4899', obstacle: '#38bdf8', darkBlock: '#1a0829' },
+            { id: 12, name: 'Затерянное Измерение', price: 99999, primary: '#10b981', obstacle: '#fbbf24', darkBlock: '#08291c' },
+            { id: 13, name: 'Радужные Кристаллы Космоса', price: 99999, primary: '#ff00ea', obstacle: '#00ffff', darkBlock: '#180929' }
         ];
 
         const skinsList = [
@@ -884,17 +1190,20 @@ let lastCalClaimTime = parseInt(localStorage.getItem('homuty_last_cal_claim_time
             { id: 'void', name: 'Теневой Пингвин', price: 2500, desc: 'Полностью черный костюм' },
             { id: 'plasma', name: 'Электро-Пингвин', price: 4000, desc: 'Заряжен электричеством' },
             { id: 'gold', name: 'Золотой Пингвин', price: 6000, desc: 'Дорогой и блестящий' },
-            { id: 'cal_rare_penguin1', name: 'Пингвин Кибер-Самурай', price: 99999, desc: 'Награда за 10 дней календаря' },
-            { id: 'cal_legendary_penguin', name: 'Космический Кинг Пингвин', price: 99999, desc: 'Легендарная награда за 30 дней!' }
+            { id: 'cal_cyber_pilot', name: 'Кибер-Пилот', price: 99999, desc: 'Награда за 2 день календаря' },
+            { id: 'cal_neon_phantom', name: 'Неоновый Фантом', price: 99999, desc: 'Награда за 6 день календаря' },
+            { id: 'cal_stellar_ace', name: 'Звездный Ас', price: 99999, desc: 'Награда за 10 день календаря' },
+            { id: 'cal_solar_glider', name: 'Солнечный Планер', price: 99999, desc: 'Награда за 14 день календаря' },
+            { id: 'cal_quantum_bird', name: 'Квантовый Пингвин', price: 99999, desc: 'Награда за 18 день календаря' },
+            { id: 'cal_mega_king', name: 'Радужный Кинг', price: 99999, desc: 'Ультра награда за 20 дней календаря!' }
         ];
 
         highScoreVal.innerText = highScore;
         updateWalletUI();
-
-        function showToast(text, duration = 3000) {
+function showToast(text, duration = 3000) {
             if (toastTimeout) clearTimeout(toastTimeout);
             gameToast.innerText = text;
-gameToast.classList.add('active');
+            gameToast.classList.add('active');
             toastTimeout = setTimeout(() => {
                 gameToast.classList.remove('active');
             }, duration);
@@ -903,7 +1212,7 @@ gameToast.classList.add('active');
         function updateWalletUI() {
             coinsCount.innerText = totalCoins;
             shopCoinsCount.innerText = totalCoins;
-            calBadge.innerText = `${claimedCalDays}/30`;
+            calBadge.innerText = `${claimedCalDays}/20`;
             localStorage.setItem('homuty_v6_coins', totalCoins);
             localStorage.setItem('homuty_v6_highscore', highScore);
             localStorage.setItem('homuty_claimed_cal_days', claimedCalDays);
@@ -929,18 +1238,18 @@ gameToast.classList.add('active');
             const timePassed = now - lastCalClaimTime;
             const isReadyNext = timePassed >= hours24 || lastCalClaimTime === 0;
 
-            if (!isReadyNext && claimedCalDays < 30) {
+            if (!isReadyNext && claimedCalDays < 20) {
                 const timeLeft = hours24 - timePassed;
                 const hrs = Math.floor(timeLeft / (1000 * 60 * 60));
                 const mins = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 calTimerStatus.innerText = `⏳ Следующий подарок доступен через: ${hrs}ч ${mins}мин`;
-            } else if (claimedCalDays >= 30) {
-                calTimerStatus.innerText = "🎉 ВСЕ 30 НАГРАД ПОЛУЧЕНЫ!";
+            } else if (claimedCalDays >= 20) {
+                calTimerStatus.innerText = "🎉 ВСЕ 20 НАГРАД УСПЕШНО ПОЛУЧЕНЫ!";
             } else {
                 calTimerStatus.innerText = "🎁 Награда доступна к получению!";
             }
 
-            calendar30Data.forEach((d, idx) => {
+            calendar20Data.forEach((d, idx) => {
                 const el = document.createElement('div');
                 let statusClass = 'locked';
 
@@ -950,20 +1259,30 @@ gameToast.classList.add('active');
                     statusClass = isReadyNext ? 'ready' : 'locked';
                 }
 
-                el.className = `cal-item ${statusClass} ${d.type === 'legendary' ? 'legendary-day' : ''}`;
+                el.className = `cal-item ${statusClass} ${d.type === 'megapack' ? 'megapack-day' : ''}`;
 
                 let icon = '💰';
                 if (d.type === 'skin') icon = '🐧';
                 if (d.type === 'map') icon = '🗺️';
-                if (d.type === 'legendary') icon = '👑';
+                if (d.type === 'megapack') icon = '👑🌈';
 
-                el.innerHTML = `
-                    <div class="cal-day-num">${d.day}Д</div>
-                    <div class="cal-item-icon">${icon}</div>
-                    <div class="cal-item-desc">${idx < claimedCalDays ? 'ВЗЯТО' : d.desc}</div>
-                `;
-
-                if (statusClass === 'ready') {
+                if (d.type === 'megapack') {
+                    el.innerHTML = `
+                        <div class="cal-day-num">ДЕНЬ ${d.day} (ФИНАЛ)</div>
+                        <div class="cal-item-icon">${icon}</div>
+                        <div class="megapack-info">
+                            <div class="cal-day-num" style="color:#f472b6">МЕГАКОМПЛЕКТ</div>
+                            <div class="cal-item-desc">${idx < claimedCalDays ? '✓ НАГРАДА ЗАБРАНА' : d.desc}</div>
+                        </div>
+                    `;
+                } else {
+                    el.innerHTML = `
+                        <div class="cal-day-num">${d.day}Д</div>
+                        <div class="cal-item-icon">${icon}</div>
+                        <div class="cal-item-desc">${idx < claimedCalDays ? '✓ ЗАБРАНО' : d.desc}</div>
+                    `;
+                }
+if (statusClass === 'ready') {
                     el.onclick = () => claimCalendarReward(d);
                 }
 
@@ -972,6 +1291,9 @@ gameToast.classList.add('active');
         }
 
         function claimCalendarReward(reward) {
+            if (isClaimingInProgress) return;
+            isClaimingInProgress = true;
+
             claimedCalDays++;
             lastCalClaimTime = Date.now();
 
@@ -979,13 +1301,20 @@ gameToast.classList.add('active');
             if (reward.skin && !unlockedSkins.includes(reward.skin)) unlockedSkins.push(reward.skin);
             if (reward.map !== undefined && !unlockedMaps.includes(reward.map)) unlockedMaps.push(reward.map);
 
-            playCoinRewardSound();
+            playCoinRewardSong();
             saveGameData();
             renderCalendarGrid();
+
+            let iconSym = reward.type === 'skin' ? '🐧' : (reward.type === 'map' ? '🗺️' : (reward.type === 'megapack' ? '👑' : '💰'));
+            showPurchasePopup(iconSym, `НАГРАДА ДНЯ ${reward.day}!`, "Награда успешно забронирована и получена!");
+
+            setTimeout(() => {
+                isClaimingInProgress = false;
+            }, 600);
         }
 
         function renderShop() {
-shopItemsContainer.innerHTML = '';
+            shopItemsContainer.innerHTML = '';
             if (activeShopTab === 'skins') {
                 skinsList.forEach(skin => {
                     const isUnlocked = unlockedSkins.includes(skin.id);
@@ -1003,7 +1332,7 @@ shopItemsContainer.innerHTML = '';
                         </div>
                         <div>
                             ${isEquipped ? '<button class="item-action-btn equipped">АКТИВЕН</button>' : 
-                              isUnlocked ? `<button class="item-action-btn" onclick="selectSkin('${skin.id}')">ВЫБРАТЬ</button>` : 
+                              isUnlocked ? `<button class="item-action-btn purchased" onclick="selectSkin('${skin.id}')">КУПЛЕНО ✓</button>` : 
                               skin.price > 90000 ? '<button class="item-action-btn equipped" style="color:#fbbf24;">ИЗ КАЛЕНДАРЯ</button>' :
                               `<button class="item-action-btn buy" onclick="buySkin('${skin.id}', ${skin.price})">💰 ${skin.price}</button>`}
                         </div>
@@ -1023,14 +1352,14 @@ shopItemsContainer.innerHTML = '';
                         </div>
                         <div class="shop-item-info">
                             <h4>${map.name}</h4>
-                            <p>${map.id >= 6 ? 'Эксклюзивная локация' : 'Игровая локация'}</p>
+                            <p>${map.id >= 9 ? 'Эксклюзивная карта из календаря' : 'Игровая локация'}</p>
                         </div>
                         <div>
                             ${isEquipped ? '<button class="item-action-btn equipped">АКТИВНА</button>' : 
-                              isUnlocked ? `<button class="item-action-btn" onclick="selectMap(${map.id})">ВЫБРАТЬ</button>` : 
+                              isUnlocked ? `<button class="item-action-btn purchased" onclick="selectMap(${map.id})">КУПЛЕНО ✓</button>` : 
                               map.price > 90000 ? '<button class="item-action-btn equipped" style="color:#fbbf24;">ИЗ КАЛЕНДАРЯ</button>' :
                               `<button class="item-action-btn buy" onclick="buyMap(${map.id}, ${map.price})">💰 ${map.price}</button>`}
-                        </div>
+</div>
                     `;
                     shopItemsContainer.appendChild(itemEl);
                 });
@@ -1060,10 +1389,10 @@ shopItemsContainer.innerHTML = '';
                 planeColor = '#333333';
                 penguinBody = '#000000';
                 beakColor = '#555555';
-            } else if (skinId === 'gold' || skinId === 'cal_legendary_penguin') {
-                planeColor = '#ffd700';
-penguinBody = skinId === 'cal_legendary_penguin' ? '#4f46e5' : '#b8860b';
-                beakColor = '#ffffff';
+            } else if (skinId === 'gold' || skinId === 'cal_mega_king') {
+                planeColor = skinId === 'cal_mega_king' ? '#ff00ea' : '#ffd700';
+                penguinBody = skinId === 'cal_mega_king' ? '#7c3aed' : '#b8860b';
+                beakColor = skinId === 'cal_mega_king' ? '#00ffff' : '#ffffff';
             }
 
             renderCtx.scale(1.3, 1.3);
@@ -1083,8 +1412,8 @@ penguinBody = skinId === 'cal_legendary_penguin' ? '#4f46e5' : '#b8860b';
             renderCtx.arc(-1, -5, 7.5, 0, Math.PI * 2);
             renderCtx.fill();
             
-            if (skinId === 'eyes' || skinId === 'cal_rare_penguin1') {
-                renderCtx.fillStyle = skinId === 'cal_rare_penguin1' ? '#ec4899' : '#333';
+            if (skinId === 'eyes' || skinId === 'cal_mega_king' || skinId === 'cal_cyber_pilot') {
+                renderCtx.fillStyle = skinId === 'cal_mega_king' ? '#00ffff' : '#333';
                 renderCtx.beginPath();
                 renderCtx.arc(3, -11, 4.5, 0, Math.PI * 2);
                 renderCtx.fill();
@@ -1131,8 +1460,8 @@ penguinBody = skinId === 'cal_legendary_penguin' ? '#4f46e5' : '#b8860b';
             renderCtx.lineTo(21, 6 + propSpread);
             renderCtx.stroke();
             
-            if (skinId === 'plasma' || skinId === 'cal_legendary_penguin') {
-                renderCtx.strokeStyle = skinId === 'cal_legendary_penguin' ? '#fbbf24' : '#ffffff';
+            if (skinId === 'plasma' || skinId === 'cal_mega_king') {
+renderCtx.strokeStyle = skinId === 'cal_mega_king' ? '#00ffff' : '#ffffff';
                 renderCtx.lineWidth = 1.8;
                 renderCtx.beginPath();
                 renderCtx.moveTo(-22, 6);
@@ -1159,11 +1488,12 @@ penguinBody = skinId === 'cal_legendary_penguin' ? '#4f46e5' : '#b8860b';
             else if (skinId === 'gold') color = '#ffd700';
             else if (skinId === 'void') color = '#a855f7';
             else if (skinId === 'plasma') color = '#00ffff';
-            else if (skinId === 'cal_rare_penguin1') color = '#ec4899';
-            else if (skinId === 'cal_legendary_penguin') color = '#fbbf24';
+            else if (skinId === 'cal_mega_king') color = '#ff00ea';
+            else if (skinId === 'cal_neon_phantom') color = '#ec4899';
+            else if (skinId === 'cal_stellar_ace') color = '#38bdf8';
 
             pCtx.shadowBlur = 10;
-pCtx.shadowColor = color;
+            pCtx.shadowColor = color;
             
             let fakeFrameCount = Math.floor(Date.now() / 50);
             drawPenguinInPlane(pCtx, skinId, fakeFrameCount, color, 0);
@@ -1195,38 +1525,76 @@ pCtx.shadowColor = color;
 
         window.selectSkin = function(id) { currentSkin = id; saveGameData(); renderShop(); }
         window.buySkin = function(id, price) {
-            if (totalCoins >= price) { totalCoins -= price; unlockedSkins.push(id); currentSkin = id; updateWalletUI(); saveGameData(); renderShop(); }
-            else alert('Недостаточно монет!');
+            if (totalCoins >= price) {
+                totalCoins -= price;
+                unlockedSkins.push(id);
+                currentSkin = id;
+                updateWalletUI();
+                saveGameData();
+                renderShop();
+                let sk = skinsList.find(s => s.id === id);
+                showPurchasePopup('🐧', 'УСПЕШНАЯ ПОКУПКА!', sk ? sk.name : id);
+            } else {
+                alert('Недостаточно монет!');
+            }
         }
         window.selectMap = function(id) { currentMapIndex = id; saveGameData(); renderShop(); }
         window.buyMap = function(id, price) {
-            if (totalCoins >= price) { totalCoins -= price; unlockedMaps.push(id); currentMapIndex = id; updateWalletUI(); saveGameData(); renderShop(); }
-            else alert('Недостаточно монет!');
+            if (totalCoins >= price) {
+                totalCoins -= price;
+                unlockedMaps.push(id);
+                currentMapIndex = id;
+                updateWalletUI();
+                saveGameData();
+                renderShop();
+                let mp = colorThemes.find(m => m.id === id);
+                showPurchasePopup('🗺️', 'УСПЕШНАЯ ПОКУПКА!', mp ? mp.name : id);
+            } else {
+                alert('Недостаточно монет!');
+            }
         }
 
         tabSkinsBtn.addEventListener('click', () => { activeShopTab = 'skins'; tabSkinsBtn.classList.add('active'); tabMapsBtn.classList.remove('active'); renderShop(); });
         tabMapsBtn.addEventListener('click', () => { activeShopTab = 'maps'; tabMapsBtn.classList.add('active'); tabSkinsBtn.classList.remove('active'); renderShop(); });
 
-        backArrowShop.addEventListener('click', () => { shopMenu.style.display = 'none'; mainMenu.style.display = 'flex'; updateWalletUI(); });
-        backArrowSettings.addEventListener('click', () => { settingsMenu.style.display = 'none'; mainMenu.style.display = 'flex'; });
+        backArrowShop.addEventListener('click', () => {
+            shopMenu.style.display = 'none';
+mainMenu.style.display = 'flex';
+            updateWalletUI();
+        });
+
+        backArrowSettings.addEventListener('click', () => {
+            settingsMenu.style.display = 'none';
+            mainMenu.style.display = 'flex';
+        });
         
         backArrowCalendar.addEventListener('click', () => {
             calendarScreen.classList.remove('active');
-            setTimeout(() => {
+            showScreenLoader("ЗАГРУЗКА МЕНЮ...", () => {
                 calendarScreen.style.display = 'none';
                 mainMenu.style.display = 'flex';
                 updateWalletUI();
-            }, 350);
+            });
         });
 
-        shopBtn.addEventListener('click', () => { mainMenu.style.display = 'none'; shopMenu.style.display = 'flex'; renderShop(); });
-        settingsBtn.addEventListener('click', () => { mainMenu.style.display = 'none'; settingsMenu.style.display = 'flex'; });
+        shopBtn.addEventListener('click', () => {
+            mainMenu.style.display = 'none';
+            shopMenu.style.display = 'flex';
+            renderShop();
+        });
+
+        settingsBtn.addEventListener('click', () => {
+            mainMenu.style.display = 'none';
+            settingsMenu.style.display = 'flex';
+        });
         
         calendarBtn.addEventListener('click', () => {
-            mainMenu.style.display = 'none';
-            calendarScreen.style.display = 'flex';
-            setTimeout(() => { calendarScreen.classList.add('active'); }, 10);
-            renderCalendarGrid();
+            showScreenLoader("ОТКРЫТИЕ КАЛЕНДАРЯ...", () => {
+                mainMenu.style.display = 'none';
+                calendarScreen.style.display = 'flex';
+                setTimeout(() => { calendarScreen.classList.add('active'); }, 10);
+                renderCalendarGrid();
+            });
         });
 
         restartGameBtn.addEventListener('click', () => {
@@ -1251,7 +1619,8 @@ pCtx.shadowColor = color;
             toggleMusicBtn.innerText = musicEnabled ? "МУЗЫКА: ВКЛ" : "МУЗЫКА: ВЫКЛ";
             if (!musicEnabled) stopMusicEngine();
         });
-loadMusicBtn.addEventListener('click', () => { musicFileInput.click(); });
+
+        loadMusicBtn.addEventListener('click', () => { musicFileInput.click(); });
         
         musicFileInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -1274,6 +1643,10 @@ loadMusicBtn.addEventListener('click', () => { musicFileInput.click(); });
             }
         });
 
+        // СТАРТ ИГРЫ: ОГРОМНЫЙ ГРАДИЕНТНЫЙ ТЕКСТ ПО СЕРЕДИНЕ, КОТОРЫЙ МЕДЛЕННО ИСЧЕЗАЕТ
+        let goalTextAlpha = 0;
+        let goalTextString = "ГЛАВНАЯ ЦЕЛЬ: НАБРАТЬ БОЛЬШЕ ОЧКОВ!";
+
         playBtn.addEventListener('click', (e) => {
             e.preventDefault();
             initAudio();
@@ -1282,6 +1655,7 @@ loadMusicBtn.addEventListener('click', () => { musicFileInput.click(); });
             isAutoPlay = false; 
             startGame();
             startMelodyEngine();
+            goalTextAlpha = 2.5; // Плавное затухание текста цели по центру
         });
 
         function initAudio() {
@@ -1293,8 +1667,7 @@ loadMusicBtn.addEventListener('click', () => { musicFileInput.click(); });
             }
             if (audioCtx.state === 'suspended') audioCtx.resume();
         }
-
-        function setupCustomAudioNode() {
+function setupCustomAudioNode() {
             if (!audioCtx) initAudio();
             if (customAudio && !sourceNode) {
                 try {
@@ -1353,7 +1726,7 @@ loadMusicBtn.addEventListener('click', () => { musicFileInput.click(); });
                 if (beatStep % 2 === 0) {
                     let leadOsc = audioCtx.createOscillator();
                     let leadGain = audioCtx.createGain();
-leadOsc.type = 'triangle';
+                    leadOsc.type = 'triangle';
                     leadOsc.frequency.setValueAtTime(leadNote, time);
                     leadGain.gain.setValueAtTime(0.12, time); 
                     leadGain.gain.exponentialRampToValueAtTime(0.001, time + 0.25);
@@ -1391,7 +1764,7 @@ leadOsc.type = 'triangle';
             const gain = audioCtx.createGain();
             osc.type = 'sine';
             osc.frequency.setValueAtTime(659.25, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
+osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
             gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
             osc.connect(gain);
@@ -1451,7 +1824,7 @@ leadOsc.type = 'triangle';
             obstacles = [];
             particles = [];
             player.y = window.innerHeight / 2;
-player.targetY = window.innerHeight / 2;
+            player.targetY = window.innerHeight / 2;
             player.currentTilt = 0;
             frameCount = 0;
             currentSpeed = baseSpeed;
@@ -1461,8 +1834,6 @@ player.targetY = window.innerHeight / 2;
 
             if (!tutorialShown) {
                 tutorialShown = true;
-                saveGameData();
-                showToast("УПРАВЛЕНИЕ: Веди пальцем или мышкой вверх и вниз!", 3500);
             }
         }
 
@@ -1498,7 +1869,7 @@ player.targetY = window.innerHeight / 2;
         }
 
         function playCoinRewardSong() {
-            if (!audioCtx) initAudio();
+if (!audioCtx) initAudio();
             if (!audioCtx) return;
             let now = audioCtx.currentTime;
             for (let i = 0; i < 6; i++) {
@@ -1539,30 +1910,49 @@ player.targetY = window.innerHeight / 2;
             }, 300);
         }
 
+        // ГЕНЕРАЦИЯ КОЛОНН С УЧЕТОМ УРОВНЕЙ ДО 1000 И АНИМАЦИЕЙ ВСПЛЫВАНИЯ
         function spawnObstacle() {
-            const gapHeights = [165, 180, 200];
-            const gapHeight = gapHeights[Math.floor(Math.random() * gapHeights.length)];
-            const minPos = 50;
-            const maxPos = canvas.height - 50 - gapHeight;
+            let difficultyProgress = Math.min(score / 1000, 1.0); 
+
+            let minGap = Math.max(160, 220 - difficultyProgress * 50);
+            let maxGap = Math.max(190, 250 - difficultyProgress * 50);
+            const gapHeight = Math.floor(Math.random() * (maxGap - minGap + 1)) + minGap;
+            
+            const safetyMargin = 60;
+            const maxPos = canvas.height - safetyMargin - gapHeight;
+            const minPos = safetyMargin;
             const gapY = Math.random() * (maxPos - minPos) + minPos;
-            const widths = [28, 34, 40];
+
+            const widths = [32, 38, 46];
             const width = widths[Math.floor(Math.random() * widths.length)];
 
-            obstacles.push({ x: canvas.width, width: width, topHeight: gapY, bottomY: gapY + gapHeight, bottomHeight: canvas.height - (gapY + gapHeight), passed: false });
+            obstacles.push({ 
+                x: canvas.width + 60, 
+                width: width, 
+                topHeight: gapY, 
+                bottomY: gapY + gapHeight, 
+                bottomHeight: canvas.height - (gapY + gapHeight), 
+                passed: false,
+                spawnAnimProgress: 0 
+            });
         }
 
         function getCurrentTheme() {
-            return colorThemes[currentMapIndex] || colorThemes[0];
+            return colorThemes.find(m => m.id === currentMapIndex) || colorThemes[0];
         }
-// НЕЗАВИСИМЫЙ ОТ FPS ФИКС (DELTA TIME)
+
         let lastTime = performance.now();
 
         function update(dt) {
             renderLivePreviews();
 
-            // Нормализуем коэффициент скорости под 60 FPS (если у устройства 120 Гц или просадки, dt сглаживает движение)
             let timeFactor = dt / (1000 / 60);
-            if (timeFactor > 3) timeFactor = 3; // Защита от резких фризов
+            if (timeFactor > 3) timeFactor = 3;
+
+            if (goalTextAlpha > 0) {
+                goalTextAlpha -= 0.008 * timeFactor; // Очень медленное и плавное исчезновение текста по центру
+                if (goalTextAlpha < 0) goalTextAlpha = 0;
+            }
 
             if (bassCircleIntro > 0) {
                 bassCircleIntro -= 0.005 * timeFactor;
@@ -1580,8 +1970,7 @@ player.targetY = window.innerHeight / 2;
                     bassPulse = Math.max(bassPulse, calculatedPulse);
                 }
             }
-
-            if (bassPulse > 0) { 
+if (bassPulse > 0) { 
                 bassPulse -= 0.06 * timeFactor; 
                 if (bassPulse < 0) bassPulse = 0; 
             }
@@ -1628,8 +2017,9 @@ player.targetY = window.innerHeight / 2;
 
             if (!gameRunning) return;
 
-            if (currentSpeed < maxSpeed) {
-                currentSpeed += 0.0012 * timeFactor;
+            let speedMultiplier = 1 + Math.min(score / 1000, 1.5);
+            if (currentSpeed < maxSpeed * speedMultiplier) {
+                currentSpeed += 0.0015 * timeFactor;
             }
 
             let prevY = player.y;
@@ -1642,15 +2032,21 @@ player.targetY = window.innerHeight / 2;
             if (targetTilt < -0.45) targetTilt = -0.45;
             player.currentTilt += (targetTilt - player.currentTilt) * (0.15 * timeFactor);
 
-            let spawnRate = Math.max(55, Math.floor(85 - (currentSpeed * 4)));
+            let spawnRate = Math.max(50, Math.floor(90 - (currentSpeed * 4)));
             if (Math.floor(frameCount) % spawnRate === 0) spawnObstacle();
 
             if (Math.floor(frameCount) % 3 === 0) {
-particles.push({ x: player.x - 20, y: player.y + (Math.random() * 14 - 7), size: Math.random() * 2.5 + 1.5, speedX: -3.5 - Math.random() * 1.5, alpha: 0.85, color: '#ffffff' });
+                particles.push({ x: player.x - 20, y: player.y + (Math.random() * 14 - 7), size: Math.random() * 2.5 + 1.5, speedX: -3.5 - Math.random() * 1.5, alpha: 0.85, color: '#ffffff' });
             }
 
             obstacles.forEach((obs, index) => {
+                if (obs.spawnAnimProgress < 1) {
+                    obs.spawnAnimProgress += 0.04 * timeFactor;
+                    if (obs.spawnAnimProgress > 1) obs.spawnAnimProgress = 1;
+                }
+
                 obs.x -= currentSpeed * timeFactor;
+
                 if (player.x + (player.radius - 5) > obs.x && player.x - (player.radius - 5) < obs.x + obs.width) {
                     if (player.y - (player.radius - 5) < obs.topHeight || player.y + (player.radius - 5) > obs.bottomY) gameOver();
                 }
@@ -1662,25 +2058,28 @@ particles.push({ x: player.x - 20, y: player.y + (Math.random() * 14 - 7), size:
                     playScoreSound(); 
 
                     if (score >= 50 && !milestoneShownThisRun && congratsCount < 10) {
-                        milestoneShownThisRun = true;
+milestoneShownThisRun = true;
                         congratsCount++;
                         saveGameData();
                         showToast("МОЛОДЕЦ! 🚀 Отличный результат!", 2500);
                     }
                 }
-                if (obs.x + obs.width < 0) obstacles.splice(index, 1);
+                if (obs.x + obs.width < -50) obstacles.splice(index, 1);
             });
         }
 
         function drawPerfectStraightObstacle(obs, isTop, theme) {
             let x = obs.x;
-            let y = isTop ? 0 : obs.bottomY;
             let w = obs.width;
-            let h = isTop ? obs.topHeight : obs.bottomHeight;
+            
+            let animScale = obs.spawnAnimProgress;
+            let h = isTop ? (obs.topHeight * animScale) : (obs.bottomHeight * animScale);
+            let y = isTop ? 0 : (canvas.height - h);
 
             ctx.save();
             ctx.shadowBlur = 18;
             ctx.shadowColor = 'rgba(0, 0, 0, 0.85)';
+            ctx.globalAlpha = animScale;
 
             ctx.fillStyle = theme.darkBlock;
             ctx.fillRect(x, y, w, h);
@@ -1692,9 +2091,9 @@ particles.push({ x: player.x - 20, y: player.y + (Math.random() * 14 - 7), size:
             ctx.fillStyle = theme.primary;
             ctx.shadowBlur = 10;
             ctx.shadowColor = theme.primary;
-            ctx.globalAlpha = 0.9;
-            ctx.fillRect(x + w / 2 - 1.5, y + (isTop ? 15 : 0), 3, h - 30);
-            ctx.globalAlpha = 1.0;
+            ctx.globalAlpha = 0.9 * animScale;
+            ctx.fillRect(x + w / 2 - 1.5, y + (isTop ? 15 : 0), 3, Math.max(0, h - 30));
+            ctx.globalAlpha = 1.0 * animScale;
 
             ctx.strokeStyle = theme.primary;
             ctx.lineWidth = 1;
@@ -1747,7 +2146,8 @@ particles.push({ x: player.x - 20, y: player.y + (Math.random() * 14 - 7), size:
 
             ctx.beginPath();
             ctx.arc(centerX, centerY, baseRadius + pulseOffset, 0, Math.PI * 2);
-if (bassCircleIntro > 0.01) {
+
+            if (bassCircleIntro > 0.01) {
                 ctx.fillStyle = `rgba(255, 255, 255, ${bassCircleIntro * 0.85})`;
                 ctx.fill();
             } else {
@@ -1765,7 +2165,7 @@ if (bassCircleIntro > 0.01) {
 
             ctx.beginPath();
             ctx.arc(centerX, centerY, baseRadius + pulseOffset + 4, 0, Math.PI * 2);
-            ctx.strokeStyle = theme.primary;
+ctx.strokeStyle = theme.primary;
             ctx.lineWidth = 2;
             ctx.globalAlpha = 0.3 + bassPulse * 0.5;
             ctx.stroke();
@@ -1799,6 +2199,26 @@ if (bassCircleIntro > 0.01) {
                     drawPerfectStraightObstacle(obs, true, theme);
                     drawPerfectStraightObstacle(obs, false, theme);
                 });
+
+                // ОГРОМНЫЙ КРАСИВЫЙ ГРАДИЕНТНЫЙ ТЕКСТ ПО СЕРЕДИНЕ (ЦЕЛЬ ИГРЫ), ПЛАВНО ИСЧЕЗАЮЩИЙ
+                if (goalTextAlpha > 0) {
+                    ctx.save();
+                    ctx.font = '900 34px "Segoe UI", sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    
+                    let grad = ctx.createLinearGradient(canvas.width/2 - 250, canvas.height/2, canvas.width/2 + 250, canvas.height/2);
+                    grad.addColorStop(0, '#38bdf8');
+                    grad.addColorStop(0.5, '#c084fc');
+                    grad.addColorStop(1, '#ec4899');
+                    
+                    ctx.fillStyle = grad;
+                    ctx.shadowColor = '#ec4899';
+                    ctx.shadowBlur = 25;
+                    ctx.globalAlpha = Math.min(1.0, goalTextAlpha);
+                    ctx.fillText("ГЛАВНАЯ ЦЕЛЬ: НАБРАТЬ БОЛЬШЕ ОЧКОВ!", canvas.width / 2, canvas.height / 2);
+                    ctx.restore();
+                }
             }
 
             if (gameRunning || isAutoPlay) {
@@ -1813,6 +2233,7 @@ if (bassCircleIntro > 0.01) {
                 else if (currentSkin === 'gold') primaryColor = '#ffd700';
                 else if (currentSkin === 'void') primaryColor = '#a855f7';
                 else if (currentSkin === 'plasma') primaryColor = '#00ffff';
+                else if (currentSkin === 'cal_mega_king') primaryColor = '#ff00ea';
 
                 let playerScale = 1 + bassPulse * 0.18;
                 ctx.scale(playerScale, playerScale);
@@ -1826,7 +2247,7 @@ if (bassCircleIntro > 0.01) {
         function gameLoop(timestamp) {
             let dt = timestamp - lastTime;
             lastTime = timestamp;
-            if (!dt || dt > 200) dt = 16.66; // Защита при сворачивании вкладки
+            if (!dt || dt > 200) dt = 16.66;
 
             update(dt);
             draw();
