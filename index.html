@@ -15,7 +15,7 @@
         body, html {
             width: 100%;
             height: 100%;
-            background-color: #030508;
+            background-color: #0d0805;
             color: #f0f2f5;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             overflow: hidden;
@@ -30,7 +30,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: #020305;
+            background: #0d0805;
         }
         canvas {
             display: block;
@@ -46,7 +46,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #020305;
+            background: #0d0805;
             z-index: 100;
             display: flex;
             flex-direction: column;
@@ -58,9 +58,9 @@
             width: 90px;
             height: 90px;
             border-radius: 24px;
-            background: #0b1329;
-            border: 2px solid #38bdf8;
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+            background: #1f1008;
+            border: 2px solid #f97316;
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.5);
             margin-bottom: 25px;
             display: flex;
             align-items: center;
@@ -76,11 +76,11 @@
             font-size: 42px;
             font-weight: 900;
             letter-spacing: 6px;
-            background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+            background: linear-gradient(135deg, #f97316, #eab308, #ef4444);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 25px;
-            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.4));
+            filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.4));
         }
         .splash-progress-bg {
             width: 240px;
@@ -95,8 +95,8 @@
         .splash-progress-fill {
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, #38bdf8, #818cf8);
-            box-shadow: 0 0 12px #38bdf8;
+            background: linear-gradient(90deg, #f97316, #eab308);
+            box-shadow: 0 0 12px #f97316;
             transition: width 0.02s linear;
         }
 
@@ -107,7 +107,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(2, 3, 5, 0.75);
+            background: rgba(13, 8, 5, 0.8);
             backdrop-filter: blur(8px);
             display: none;
             flex-direction: column;
@@ -121,13 +121,13 @@
             opacity: 1;
         }
         .purchase-box {
-            background: linear-gradient(135deg, #0b1329, #172554);
-            border: 2px solid #38bdf8;
+            background: linear-gradient(135deg, #1f1008, #3e1b0a);
+            border: 2px solid #f97316;
             border-radius: 30px;
             padding: 30px 25px;
             width: 300px;
             text-align: center;
-            box-shadow: 0 0 50px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 50px rgba(249, 115, 22, 0.6);
 display: flex;
             flex-direction: column;
             align-items: center;
@@ -141,13 +141,13 @@ display: flex;
         .purchase-icon-preview {
             width: 75px;
             height: 75px;
-            background: #020305;
+            background: #0d0805;
             border-radius: 20px;
-            border: 1px solid #38bdf8;
+            border: 1px solid #f97316;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
             font-size: 32px;
         }
         .purchase-box h3 {
@@ -158,7 +158,7 @@ display: flex;
         }
         .purchase-box p {
             font-size: 13px;
-            color: #94a3b8;
+            color: #fdba74;
             margin-bottom: 5px;
         }
 
@@ -169,7 +169,7 @@ display: flex;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 5, 8, 0.85);
+            background: rgba(13, 8, 5, 0.88);
             backdrop-filter: blur(10px);
             display: none;
             flex-direction: column;
@@ -185,8 +185,8 @@ display: flex;
         .screen-loader-spinner {
             width: 45px;
             height: 45px;
-            border: 4px solid rgba(56, 189, 248, 0.2);
-            border-top: 4px solid #38bdf8;
+            border: 4px solid rgba(249, 115, 22, 0.2);
+            border-top: 4px solid #f97316;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             margin-bottom: 12px;
@@ -194,7 +194,7 @@ display: flex;
         .screen-loader-text {
             font-size: 13px;
             font-weight: 800;
-            color: #38bdf8;
+            color: #f97316;
             letter-spacing: 2px;
         }
 
@@ -205,17 +205,39 @@ display: flex;
             right: 25px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             pointer-events: none;
             font-size: 18px;
             font-weight: 900;
             letter-spacing: 2px;
-            color: #64748b;
+            color: #fed7aa;
             z-index: 5;
             display: none;
         }
         .ui-overlay span {
-            color: #38bdf8;
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.9);
+            color: #f97316;
+            text-shadow: 0 0 15px rgba(249, 115, 22, 0.9);
+        }
+
+        .pause-btn-hud {
+            pointer-events: auto;
+            background: rgba(31, 16, 8, 0.8);
+            border: 1px solid #f97316;
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+            transition: transform 0.15s ease;
+        }
+        .pause-btn-hud:active {
+            transform: scale(0.9);
         }
 
         .game-toast {
@@ -223,9 +245,9 @@ display: flex;
             top: 75px;
             left: 50%;
             transform: translateX(-50%) translateY(-20px);
-            background: rgba(11, 19, 41, 0.92);
-            border: 1px solid #38bdf8;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            background: rgba(31, 16, 8, 0.92);
+            border: 1px solid #f97316;
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
             backdrop-filter: blur(10px);
             color: #ffffff;
             padding: 12px 24px;
@@ -238,7 +260,7 @@ display: flex;
             opacity: 0;
             transition: opacity 0.4s ease, transform 0.4s ease;
             text-align: center;
-            max-width: 85%;
+max-width: 85%;
             white-space: nowrap;
         }
         .game-toast.active {
@@ -252,7 +274,7 @@ display: flex;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 5, 8, 0.88);
+            background: rgba(13, 8, 5, 0.88);
             backdrop-filter: blur(12px);
             display: none;
             flex-direction: column;
@@ -261,11 +283,11 @@ display: flex;
             z-index: 40;
         }
         .loading-box {
-            background: #0b1329;
-            border: 1px solid #38bdf8;
-padding: 25px 35px;
+            background: #1f1008;
+            border: 1px solid #f97316;
+            padding: 25px 35px;
             border-radius: 20px;
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.4);
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -281,8 +303,8 @@ padding: 25px 35px;
         .spinner {
             width: 40px;
             height: 40px;
-            border: 4px solid rgba(56, 189, 248, 0.2);
-            border-top: 4px solid #38bdf8;
+            border: 4px solid rgba(249, 115, 22, 0.2);
+            border-top: 4px solid #f97316;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -313,8 +335,8 @@ padding: 25px 35px;
         }
         .back-arrow-btn:active {
             transform: scale(0.9);
-            background: #38bdf8;
-            color: #030508;
+            background: #f97316;
+            color: #0d0805;
         }
 
         .calendar-btn {
@@ -323,8 +345,8 @@ padding: 25px 35px;
             right: 20px;
             width: 60px;
             height: 60px;
-            background: rgba(11, 19, 41, 0.85);
-            border: 2px solid #ec4899;
+            background: rgba(31, 16, 8, 0.85);
+            border: 2px solid #ea580c;
             border-radius: 16px;
             display: flex;
             flex-direction: column;
@@ -332,7 +354,7 @@ padding: 25px 35px;
             justify-content: center;
             cursor: pointer;
             z-index: 20;
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+            box-shadow: 0 0 20px rgba(234, 88, 12, 0.4);
             backdrop-filter: blur(8px);
             transition: transform 0.2s ease;
         }
@@ -347,7 +369,7 @@ padding: 25px 35px;
             gap: 2px;
         }
         .cal-cell {
-            background: #ec4899;
+            background: #ea580c;
             border-radius: 2px;
         }
         .cal-badge {
@@ -364,7 +386,7 @@ padding: 25px 35px;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #0b1329 0%, #030508 100%);
+            background: radial-gradient(circle at center, #1f1008 0%, #0d0805 100%);
             backdrop-filter: blur(18px);
             display: none;
             flex-direction: column;
@@ -374,7 +396,7 @@ padding: 25px 35px;
             padding: 25px 15px;
             overflow-y: auto;
             touch-action: pan-y;
-            opacity: 0;
+opacity: 0;
             transform: scale(0.95);
             transition: opacity 0.35s ease, transform 0.35s ease;
         }
@@ -385,16 +407,16 @@ padding: 25px 35px;
         .calendar-screen h2 {
             font-size: 26px;
             font-weight: 900;
-            background: linear-gradient(135deg, #f472b6, #c084fc, #38bdf8);
+            background: linear-gradient(135deg, #f97316, #eab308, #ef4444);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 6px;
             margin-top: 10px;
             letter-spacing: 2px;
             text-align: center;
-            filter: drop-shadow(0 0 15px rgba(244, 114, 182, 0.4));
+            filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.4));
         }
-.calendar-grid {
+        .calendar-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
@@ -405,8 +427,8 @@ padding: 25px 35px;
         }
         .cal-item {
             aspect-ratio: 0.82;
-            background: rgba(11, 19, 41, 0.65);
-            border: 2px solid rgba(56, 189, 248, 0.25);
+            background: rgba(31, 16, 8, 0.65);
+            border: 2px solid rgba(249, 115, 22, 0.25);
             border-radius: 16px;
             display: flex;
             flex-direction: column;
@@ -422,14 +444,14 @@ padding: 25px 35px;
             transform: scale(0.94);
         }
         .cal-item.ready {
-            border-color: #38bdf8;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.7);
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.3));
+            border-color: #f97316;
+            box-shadow: 0 0 25px rgba(249, 115, 22, 0.7);
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(234, 88, 12, 0.3));
             animation: pulseCard 1.5s infinite alternate;
         }
         @keyframes pulseCard {
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }
-            100% { transform: scale(1.05); box-shadow: 0 0 30px rgba(56, 189, 248, 0.85); }
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(249, 115, 22, 0.5); }
+            100% { transform: scale(1.05); box-shadow: 0 0 30px rgba(249, 115, 22, 0.85); }
         }
         .cal-item.claimed {
             opacity: 0.65;
@@ -446,9 +468,9 @@ padding: 25px 35px;
         .cal-item.megapack-day {
             grid-column: span 4;
             aspect-ratio: 2.8;
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(168, 85, 247, 0.4), rgba(56, 189, 248, 0.3));
-            border: 2px solid #ec4899;
-            box-shadow: 0 0 35px rgba(236, 72, 153, 0.6);
+            background: linear-gradient(135deg, rgba(234, 88, 12, 0.3), rgba(239, 68, 68, 0.4), rgba(249, 115, 22, 0.3));
+            border: 2px solid #ea580c;
+            box-shadow: 0 0 35px rgba(234, 88, 12, 0.6);
             flex-direction: row;
             padding: 15px 20px;
             align-items: center;
@@ -457,18 +479,18 @@ padding: 25px 35px;
             animation: pulseMega 1.5s infinite alternate;
         }
         @keyframes pulseMega {
-            0% { transform: scale(1); box-shadow: 0 0 25px rgba(236, 72, 153, 0.6); }
-            100% { transform: scale(1.03); box-shadow: 0 0 45px rgba(236, 72, 153, 0.9); }
+            0% { transform: scale(1); box-shadow: 0 0 25px rgba(234, 88, 12, 0.6); }
+            100% { transform: scale(1.03); box-shadow: 0 0 45px rgba(234, 88, 12, 0.9); }
         }
         .cal-day-num {
             font-size: 11px;
             font-weight: 900;
-            color: #94a3b8;
+            color: #fdba74;
             align-self: flex-start;
         }
-        .cal-item.ready .cal-day-num { color: #38bdf8; }
+        .cal-item.ready .cal-day-num { color: #f97316; }
         .cal-item.claimed .cal-day-num { color: #10b981; }
-        .cal-item.megapack-day .cal-day-num { align-self: flex-start; font-size: 13px; color: #f472b6; }
+        .cal-item.megapack-day .cal-day-num { align-self: flex-start; font-size: 13px; color: #f97316; }
         
         .cal-item-icon {
             font-size: 26px;
@@ -481,7 +503,7 @@ padding: 25px 35px;
             100% { transform: translateY(-4px); }
         }
         .megapack-day .cal-item-icon {
-            font-size: 44px;
+font-size: 44px;
             margin: 0 20px;
         }
         .megapack-info {
@@ -504,8 +526,8 @@ padding: 25px 35px;
         }
         .megapack-info .cal-item-desc {
             font-size: 15px;
-            background: linear-gradient(135deg, #f472b6, #fbbf24);
--webkit-background-clip: text;
+            background: linear-gradient(135deg, #f97316, #fbbf24);
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-top: 2px;
         }
@@ -517,7 +539,7 @@ padding: 25px 35px;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 5, 8, 0.35);
+            background: rgba(13, 8, 5, 0.35);
             backdrop-filter: blur(3px);
             display: flex;
             flex-direction: column;
@@ -531,14 +553,14 @@ padding: 25px 35px;
         .menu-screen h1 {
             font-size: 64px;
             font-weight: 900;
-            background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc, #ec4899);
+            background: linear-gradient(135deg, #f97316, #eab308, #ef4444, #dc2626);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientAnim 4s ease infinite;
             margin-bottom: 20px;
             letter-spacing: 5px;
-            filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.8));
+            filter: drop-shadow(0 0 25px rgba(249, 115, 22, 0.8));
         }
 
         @keyframes gradientAnim {
@@ -565,14 +587,17 @@ padding: 25px 35px;
 
         .menu-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 250px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 450px;
         }
 
         .btn {
-            background: linear-gradient(135deg, #38bdf8, #6366f1);
-            color: #030508;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: #0d0805;
             border: none;
             padding: 15px 20px;
             font-size: 15px;
@@ -580,34 +605,35 @@ padding: 25px 35px;
             border-radius: 30px;
             cursor: pointer;
             transition: transform 0.15s ease, box-shadow 0.2s ease;
-            box-shadow: 0 5px 25px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 5px 25px rgba(249, 115, 22, 0.5);
             letter-spacing: 1.5px;
             text-align: center;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            flex-grow: 1;
         }
         .btn:active {
             transform: scale(0.94);
         }
         .btn-secondary {
-            background: rgba(11, 19, 41, 0.65);
+            background: rgba(31, 16, 8, 0.65);
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(8px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
-        /* ОКНО ИТОГОВ ИГРЫ */
+        /* ОКНО ИТОГОВ И ПАУЗЫ ИГРЫ */
         .results-modal {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(2, 3, 5, 0.88);
-            backdrop-filter: blur(12px);
+            background: rgba(13, 8, 5, 0.88);
+backdrop-filter: blur(12px);
             display: none;
             flex-direction: column;
             align-items: center;
@@ -615,13 +641,13 @@ padding: 25px 35px;
             z-index: 50;
         }
         .results-box {
-            background: #0b1329;
-            border: 2px solid #38bdf8;
+            background: #1f1008;
+            border: 2px solid #f97316;
             border-radius: 28px;
             padding: 30px;
             width: 320px;
             text-align: center;
-            box-shadow: 0 0 40px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 40px rgba(249, 115, 22, 0.4);
             position: relative;
             display: flex;
             flex-direction: column;
@@ -636,7 +662,7 @@ padding: 25px 35px;
         }
         .results-stat-row {
             display: flex;
-justify-content: space-between;
+            justify-content: space-between;
             align-items: center;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -646,7 +672,7 @@ justify-content: space-between;
             font-size: 15px;
         }
         .results-stat-val {
-            color: #38bdf8;
+            color: #f97316;
             font-size: 18px;
         }
         .coins-earned-val {
@@ -659,7 +685,7 @@ justify-content: space-between;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 5, 8, 0.92);
+            background: rgba(13, 8, 5, 0.92);
             backdrop-filter: blur(18px);
             display: none;
             flex-direction: column;
@@ -688,7 +714,7 @@ justify-content: space-between;
         .tab-btn {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #94a3b8;
+            color: #fdba74;
             padding: 9px 22px;
             border-radius: 18px;
             font-weight: 700;
@@ -696,17 +722,17 @@ justify-content: space-between;
             font-size: 13px;
         }
         .tab-btn.active {
-            background: #38bdf8;
-            color: #030508;
-            border-color: #38bdf8;
+            background: #f97316;
+            color: #0d0805;
+            border-color: #f97316;
         }
 
         .shop-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
             width: 100%;
-            max-width: 380px;
+            max-width: 650px;
             margin-bottom: 25px;
         }
 
@@ -724,7 +750,7 @@ justify-content: space-between;
         .preview-box {
             width: 60px;
             height: 60px;
-            background: #020305;
+            background: #0d0805;
             border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.15);
             display: flex;
@@ -749,16 +775,16 @@ justify-content: space-between;
             color: #fff;
             margin-bottom: 3px;
             font-weight: 700;
-        }
+}
         .shop-item-info p {
             font-size: 11px;
-            color: #94a3b8;
+            color: #fdba74;
             margin: 0;
         }
 
         .item-action-btn {
-            background: #38bdf8;
-            color: #030508;
+            background: #f97316;
+            color: #0d0805;
             border: none;
             padding: 9px 14px;
             font-size: 11px;
@@ -768,7 +794,7 @@ justify-content: space-between;
         }
         .item-action-btn.equipped {
             background: rgba(255, 255, 255, 0.08);
-            color: #64748b;
+            color: #a8a29e;
             cursor: default;
         }
         .item-action-btn.purchased {
@@ -779,20 +805,31 @@ justify-content: space-between;
         }
         .item-action-btn.buy {
             background: #fbbf24;
-            color: #030508;
+            color: #0d0805;
+        }
+        
+        .settings-grid {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
         }
 
         .setting-item {
-margin-bottom: 16px;
+            margin-bottom: 16px;
             width: 260px;
             display: flex;
             flex-direction: column;
             gap: 6px;
             text-align: left;
+            flex-grow: 1;
         }
         .setting-item label {
             font-size: 13px;
-            color: #94a3b8;
+            color: #fdba74;
         }
         #musicFileInput {
             display: none;
@@ -842,8 +879,11 @@ margin-bottom: 16px;
         </div>
 
         <div class="ui-overlay" id="uiOverlay">
-            <div>СЧЁТ: <span id="scoreVal">0</span></div>
-            <div>РЕКОРД: <span id="highScoreVal">0</span></div>
+            <div>СЧЁТ: <span id="scoreVal">0</span> | 💰 <span id="hudCoinsVal">0</span> <span id="boostTimerText" style="color:#00ffff; margin-left:10px; display:none;">⚡ 5.0s</span></div>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <button class="pause-btn-hud" id="pauseBtn">⏸</button>
+                <div>РЕКОРД: <span id="highScoreVal">0</span></div>
+            </div>
         </div>
 
         <!-- ГЛАВНОЕ МЕНЮ -->
@@ -851,7 +891,7 @@ margin-bottom: 16px;
             <div class="calendar-btn" id="calendarBtn">
                 <div class="cal-grid-icon">
                     <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
-                    <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+<div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
                 </div>
                 <div class="cal-badge" id="calBadge">0/20</div>
             </div>
@@ -859,7 +899,7 @@ margin-bottom: 16px;
             <h1 id="menuTitle">HOMUTY</h1>
             <div class="wallet-display" id="walletDisplay">💰 МОНЕТЫ: <span id="coinsCount">0</span></div>
             <div class="menu-buttons">
-                <button class="btn" id="playBtn">ИГРАТЬ</button>
+                <button class="btn" id="playBtn" style="min-width: 100%;">ИГРАТЬ</button>
                 <button class="btn btn-secondary" id="shopBtn">МАГАЗИН</button>
                 <button class="btn btn-secondary" id="settingsBtn">НАСТРОЙКИ</button>
             </div>
@@ -869,8 +909,18 @@ margin-bottom: 16px;
         <div class="calendar-screen" id="calendarScreen">
             <div class="back-arrow-btn" id="backArrowCalendar">←</div>
             <h2>ЕЖЕДНЕВНЫЕ НАГРАДЫ</h2>
-            <div id="calTimerStatus" style="font-size: 13px; color: #38bdf8; font-weight: 800; margin-bottom: 5px;"></div>
+            <div id="calEventTimer" style="font-size: 14px; color: #ef4444; font-weight: 900; margin-bottom: 3px; letter-spacing: 1px;"></div>
+            <div id="calTimerStatus" style="font-size: 13px; color: #f97316; font-weight: 800; margin-bottom: 5px;"></div>
             <div class="calendar-grid" id="calendarGridContainer"></div>
+        </div>
+
+        <!-- ОКНО ПАУЗЫ -->
+        <div class="results-modal" id="pauseModal">
+            <div class="results-box">
+                <div class="results-title">ПАУЗА</div>
+                <button class="btn" id="resumeGameBtn" style="width: 100%; margin-top: 10px;">ПРОДОЛЖИТЬ</button>
+                <button class="btn btn-secondary" id="pauseMenuReturnBtn" style="width: 100%;">В МЕНЮ</button>
+            </div>
         </div>
 
         <!-- ОКНО ИТОГОВ ИГРЫ -->
@@ -881,7 +931,7 @@ margin-bottom: 16px;
                     <span>НАБРАНО ОЧКОВ:</span>
                     <span class="results-stat-val" id="resScoreVal">0</span>
                 </div>
-<div class="results-stat-row">
+                <div class="results-stat-row">
                     <span>ЗАРАБОТАНО:</span>
                     <span class="results-stat-val coins-earned-val" id="resCoinsVal">+0 💰</span>
                 </div>
@@ -908,17 +958,23 @@ margin-bottom: 16px;
         <div class="sub-screen" id="settingsMenu" style="justify-content: center;">
             <div class="back-arrow-btn" id="backArrowSettings">←</div>
             <h2>НАСТРОЙКИ</h2>
-            <div class="setting-item">
-                <label>Фоновая музыка:</label>
-                <button class="btn" id="toggleMusicBtn">МУЗЫКА: ВКЛ</button>
-            </div>
-            <div class="setting-item">
-                <label>Свой трек с устройства:</label>
-                <button class="btn btn-secondary" id="loadMusicBtn">ЗАГРУЗИТЬ ТРЕК</button>
-            </div>
-            <div class="setting-item">
-                <label>Поддержка:</label>
-                <a class="btn" id="supportBtn" href="https://t.me/TgSupportTest1Bot" target="_blank" rel="noopener noreferrer">НАПИСАТЬ РАЗРАБОТЧИКУ</a>
+            <div class="settings-grid">
+                <div class="setting-item">
+                    <label>Режим управления:</label>
+                    <button class="btn" id="toggleControlBtn">УПРАВЛЕНИЕ: СЛЕДОВАНИЕ</button>
+                </div>
+                <div class="setting-item">
+                    <label>Фоновая музыка:</label>
+                    <button class="btn" id="toggleMusicBtn">МУЗЫКА: ВКЛ</button>
+                </div>
+                <div class="setting-item">
+                    <label>Свой трек с устройства:</label>
+                    <button class="btn btn-secondary" id="loadMusicBtn">ЗАГРУЗИТЬ ТРЕК</button>
+                </div>
+<div class="setting-item">
+                    <label>Поддержка:</label>
+                    <a class="btn" id="supportBtn" href="https://t.me/TgSupportTest1Bot" target="_blank" rel="noopener noreferrer">НАПИСАТЬ РАЗРАБОТЧИКУ</a>
+                </div>
             </div>
         </div>
 
@@ -939,7 +995,7 @@ margin-bottom: 16px;
             let hover = Math.sin(splashAnimFrame * 0.1) * 3;
             sCtx.translate(0, hover);
 
-            sCtx.fillStyle = '#38bdf8';
+            sCtx.fillStyle = '#f97316';
             sCtx.beginPath();
             sCtx.ellipse(0, 6, 26, 11, 0, 0, Math.PI * 2);
             sCtx.fill();
@@ -947,13 +1003,13 @@ margin-bottom: 16px;
             sCtx.lineWidth = 1.5;
             sCtx.stroke();
 
-            sCtx.fillStyle = '#0284c7';
+            sCtx.fillStyle = '#ea580c';
             sCtx.beginPath();
             sCtx.ellipse(3, 13, 8, 16, -Math.PI / 4, 0, Math.PI * 2);
             sCtx.fill();
             sCtx.stroke();
 
-            sCtx.fillStyle = '#1e293b';
+            sCtx.fillStyle = '#1f1008';
             sCtx.beginPath();
             sCtx.arc(-2, -7, 12, 0, Math.PI * 2);
             sCtx.fill();
@@ -989,7 +1045,7 @@ margin-bottom: 16px;
 
             sCtx.restore();
             requestAnimationFrame(renderSplashIconAnimation);
-}
+        }
         renderSplashIconAnimation();
 
         const splashScreen = document.getElementById('appSplashScreen');
@@ -1030,7 +1086,7 @@ margin-bottom: 16px;
         }
 
         const purchaseModal = document.getElementById('purchaseModal');
-        const purchaseModalIcon = document.getElementById('purchaseModalIcon');
+const purchaseModalIcon = document.getElementById('purchaseModalIcon');
         const purchaseModalText = document.getElementById('purchaseModalText');
         const purchaseModalCloseBtn = document.getElementById('purchaseModalCloseBtn');
 
@@ -1052,7 +1108,7 @@ margin-bottom: 16px;
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initStars();
+            initLeaves();
         }
         window.addEventListener('resize', resizeCanvas);
 
@@ -1061,11 +1117,15 @@ margin-bottom: 16px;
         const settingsMenu = document.getElementById('settingsMenu');
         const calendarScreen = document.getElementById('calendarScreen');
         const resultsModal = document.getElementById('resultsModal');
+        const pauseModal = document.getElementById('pauseModal');
         
         const playBtn = document.getElementById('playBtn');
         const shopBtn = document.getElementById('shopBtn');
         const settingsBtn = document.getElementById('settingsBtn');
         const calendarBtn = document.getElementById('calendarBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resumeGameBtn = document.getElementById('resumeGameBtn');
+        const pauseMenuReturnBtn = document.getElementById('pauseMenuReturnBtn');
         
         const backArrowShop = document.getElementById('backArrowShop');
         const backArrowSettings = document.getElementById('backArrowSettings');
@@ -1077,14 +1137,18 @@ margin-bottom: 16px;
         const resCoinsVal = document.getElementById('resCoinsVal');
         const calBadge = document.getElementById('calBadge');
         const calendarGridContainer = document.getElementById('calendarGridContainer');
-const calTimerStatus = document.getElementById('calTimerStatus');
+        const calTimerStatus = document.getElementById('calTimerStatus');
+        const calEventTimer = document.getElementById('calEventTimer');
+        const boostTimerText = document.getElementById('boostTimerText');
 
         const toggleMusicBtn = document.getElementById('toggleMusicBtn');
+        const toggleControlBtn = document.getElementById('toggleControlBtn');
         const loadMusicBtn = document.getElementById('loadMusicBtn');
         const musicFileInput = document.getElementById('musicFileInput');
         const customAudio = document.getElementById('customAudio');
         const uiOverlay = document.getElementById('uiOverlay');
         const scoreVal = document.getElementById('scoreVal');
+        const hudCoinsVal = document.getElementById('hudCoinsVal');
         const highScoreVal = document.getElementById('highScoreVal');
         const menuTitle = document.getElementById('menuTitle');
         const coinsCount = document.getElementById('coinsCount');
@@ -1092,12 +1156,15 @@ const calTimerStatus = document.getElementById('calTimerStatus');
         const tabSkinsBtn = document.getElementById('tabSkinsBtn');
         const tabMapsBtn = document.getElementById('tabMapsBtn');
         const shopItemsContainer = document.getElementById('shopItemsContainer');
-        const gameToast = document.getElementById('gameToast');
+const gameToast = document.getElementById('gameToast');
         const loadingOverlay = document.getElementById('loadingOverlay');
 
         let gameRunning = false;
+        let isPaused = false;
         let isAutoPlay = true; 
         let score = 0;
+        let sessionCoins = 0;
+        let controlMode = localStorage.getItem('homuty_control_mode') || 'follow'; 
         let highScore = parseInt(localStorage.getItem('homuty_v6_highscore')) || 0;
         let totalCoins = parseInt(localStorage.getItem('homuty_v6_coins')) || 0;
         
@@ -1112,7 +1179,21 @@ const calTimerStatus = document.getElementById('calTimerStatus');
 
         let claimedCalDays = parseInt(localStorage.getItem('homuty_claimed_cal_days')) || 0;
         let lastCalClaimTime = parseInt(localStorage.getItem('homuty_last_cal_claim_time')) || 0;
+        
+        // Фиксация даты начала события календаря (20 дней)
+        let calendarEventStartTime = parseInt(localStorage.getItem('homuty_cal_event_start')) || 0;
+        if (!calendarEventStartTime) {
+            calendarEventStartTime = Date.now();
+            localStorage.setItem('homuty_cal_event_start', calendarEventStartTime);
+        }
+
         let isClaimingInProgress = false;
+        let calTimerInterval = null;
+        let audioFadeInterval = null;
+
+        // Буст скорости от молнии
+        let speedBoostTimer = 0;
+        const boostDuration = 5000; // 5 секунд
 
         const calendar20Data = [
             { day: 1, type: 'coins', coins: 150, desc: '+150 💰' },
@@ -1138,7 +1219,7 @@ const calTimerStatus = document.getElementById('calTimerStatus');
         ];
 
         let activeShopTab = 'skins';
-let musicEnabled = true;
+        let musicEnabled = true;
         let useCustomMusic = false;
 
         let audioCtx = null;
@@ -1149,26 +1230,52 @@ let musicEnabled = true;
         let bassPulse = 0;
         let bassCircleIntro = 1.0; 
         let toastTimeout = null;
-        let milestoneShownThisRun = false;
+let milestoneShownThisRun = false;
 
-        let stars = [];
-        function initStars() {
-            stars = [];
-            for (let i = 0; i < 100; i++) {
-                stars.push({
+        let leaves = [];
+        const leafColors = ['#f97316', '#ea580c', '#eab308', '#dc2626', '#b45309'];
+        
+        function initLeaves() {
+            leaves = [];
+            for (let i = 0; i < 50; i++) {
+                leaves.push({
                     x: Math.random() * window.innerWidth,
                     y: Math.random() * window.innerHeight,
-                    size: Math.random() * 2 + 0.5,
-                    speed: Math.random() * 0.8 + 0.2,
-                    alpha: Math.random(),
-                    twinkleSpeed: Math.random() * 0.03 + 0.01
+                    size: Math.random() * 8 + 6,
+                    speedX: Math.random() * 1.5 + 0.8,
+                    speedY: Math.random() * 0.8 + 0.3,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotSpeed: (Math.random() - 0.5) * 0.04,
+                    color: leafColors[Math.floor(Math.random() * leafColors.length)],
+                    swayFreq: Math.random() * 0.03 + 0.01,
+                    swayAmp: Math.random() * 1.5 + 0.5
                 });
             }
         }
-        initStars();
+        initLeaves();
+
+        function drawLeaf(ctx, x, y, size, rotation, color) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(0, -size);
+            ctx.bezierCurveTo(size * 0.8, -size * 0.3, size * 0.8, size * 0.5, 0, size);
+            ctx.bezierCurveTo(-size * 0.8, size * 0.5, -size * 0.8, -size * 0.3, 0, -size);
+            ctx.fill();
+            
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.25)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, -size);
+            ctx.lineTo(0, size);
+            ctx.stroke();
+            ctx.restore();
+        }
 
         const colorThemes = [
-            { id: 0, name: 'Кибер Синий', price: 0, primary: '#38bdf8', obstacle: '#818cf8', darkBlock: '#0b1329' },
+            { id: 0, name: 'Золотая Осень', price: 0, primary: '#f97316', obstacle: '#dc2626', darkBlock: '#29110b' },
             { id: 1, name: 'Неоновый Закат', price: 500, primary: '#f97316', obstacle: '#fb923c', darkBlock: '#29110b' },
             { id: 2, name: 'Изумрудная Матрица', price: 1000, primary: '#10b981', obstacle: '#34d399', darkBlock: '#0b2918' },
             { id: 3, name: 'Синтвейв Пурпур', price: 1800, primary: '#ec4899', obstacle: '#f472b6', darkBlock: '#290b21' },
@@ -1190,7 +1297,7 @@ let musicEnabled = true;
             { id: 'void', name: 'Теневой Пингвин', price: 2500, desc: 'Полностью черный костюм' },
             { id: 'plasma', name: 'Электро-Пингвин', price: 4000, desc: 'Заряжен электричеством' },
             { id: 'gold', name: 'Золотой Пингвин', price: 6000, desc: 'Дорогой и блестящий' },
-            { id: 'cal_cyber_pilot', name: 'Кибер-Пилот', price: 99999, desc: 'Награда за 2 день календаря' },
+{ id: 'cal_cyber_pilot', name: 'Кибер-Пилот', price: 99999, desc: 'Награда за 2 день календаря' },
             { id: 'cal_neon_phantom', name: 'Неоновый Фантом', price: 99999, desc: 'Награда за 6 день календаря' },
             { id: 'cal_stellar_ace', name: 'Звездный Ас', price: 99999, desc: 'Награда за 10 день календаря' },
             { id: 'cal_solar_glider', name: 'Солнечный Планер', price: 99999, desc: 'Награда за 14 день календаря' },
@@ -1200,7 +1307,9 @@ let musicEnabled = true;
 
         highScoreVal.innerText = highScore;
         updateWalletUI();
-function showToast(text, duration = 3000) {
+        updateControlBtnUI();
+
+        function showToast(text, duration = 3000) {
             if (toastTimeout) clearTimeout(toastTimeout);
             gameToast.innerText = text;
             gameToast.classList.add('active');
@@ -1212,11 +1321,16 @@ function showToast(text, duration = 3000) {
         function updateWalletUI() {
             coinsCount.innerText = totalCoins;
             shopCoinsCount.innerText = totalCoins;
+            hudCoinsVal.innerText = sessionCoins;
             calBadge.innerText = `${claimedCalDays}/20`;
             localStorage.setItem('homuty_v6_coins', totalCoins);
             localStorage.setItem('homuty_v6_highscore', highScore);
             localStorage.setItem('homuty_claimed_cal_days', claimedCalDays);
             localStorage.setItem('homuty_last_cal_claim_time', lastCalClaimTime);
+        }
+
+        function updateControlBtnUI() {
+            toggleControlBtn.innerText = controlMode === 'follow' ? "УПРАВЛЕНИЕ: СЛЕДОВАНИЕ" : "УПРАВЛЕНИЕ: ТАПЫ (ПОДСКОК)";
         }
 
         function saveGameData() {
@@ -1228,32 +1342,66 @@ function showToast(text, duration = 3000) {
             localStorage.setItem('homuty_v6_highscore', highScore);
             localStorage.setItem('homuty_tutorial_done', tutorialShown);
             localStorage.setItem('homuty_congrats_count', congratsCount);
+            localStorage.setItem('homuty_control_mode', controlMode);
             updateWalletUI();
         }
 
-        function renderCalendarGrid() {
-            calendarGridContainer.innerHTML = '';
+        function getEventTimeLeft() {
+            const eventDurationMs = 20 * 24 * 60 * 60 * 1000; // 20 дней события
+            const elapsed = Date.now() - calendarEventStartTime;
+            let left = eventDurationMs - elapsed;
+            return left > 0 ? left : 0;
+        }
+
+        function updateCalendarTimer() {
             const now = Date.now();
             const hours24 = 24 * 60 * 60 * 1000;
             const timePassed = now - lastCalClaimTime;
             const isReadyNext = timePassed >= hours24 || lastCalClaimTime === 0;
 
+            const eventLeft = getEventTimeLeft();
+            if (eventLeft <= 0) {
+                calEventTimer.innerText = "⛔ СОБЫТИЕ ЗАВЕРШИЛОСЬ!";
+                calTimerStatus.innerText = "Календарь пуст.";
+                return false;
+            } else {
+                const daysLeft = Math.floor(eventLeft / (1000 * 60 * 60 * 24));
+                const hrsLeft = Math.floor((eventLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minsLeft = Math.floor((eventLeft % (1000 * 60 * 60)) / (1000 * 60));
+                calEventTimer.innerText = `⏳ До конца события: ${daysLeft}д ${hrsLeft}ч ${minsLeft}м`;
+            }
+
             if (!isReadyNext && claimedCalDays < 20) {
                 const timeLeft = hours24 - timePassed;
                 const hrs = Math.floor(timeLeft / (1000 * 60 * 60));
-                const mins = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+const mins = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 calTimerStatus.innerText = `⏳ Следующий подарок доступен через: ${hrs}ч ${mins}мин`;
             } else if (claimedCalDays >= 20) {
                 calTimerStatus.innerText = "🎉 ВСЕ 20 НАГРАД УСПЕШНО ПОЛУЧЕНЫ!";
             } else {
                 calTimerStatus.innerText = "🎁 Награда доступна к получению!";
             }
+            return isReadyNext;
+        }
+
+        function renderCalendarGrid() {
+            calendarGridContainer.innerHTML = '';
+            
+            if (calTimerInterval) clearInterval(calTimerInterval);
+            const isReadyNext = updateCalendarTimer();
+            if (getEventTimeLeft() > 0 && claimedCalDays < 20) {
+                calTimerInterval = setInterval(updateCalendarTimer, 30000); 
+            }
+
+            const eventEnded = getEventTimeLeft() <= 0;
 
             calendar20Data.forEach((d, idx) => {
                 const el = document.createElement('div');
                 let statusClass = 'locked';
 
-                if (idx < claimedCalDays) {
+                if (eventEnded) {
+                    statusClass = 'locked';
+                } else if (idx < claimedCalDays) {
                     statusClass = 'claimed';
                 } else if (idx === claimedCalDays) {
                     statusClass = isReadyNext ? 'ready' : 'locked';
@@ -1271,18 +1419,19 @@ function showToast(text, duration = 3000) {
                         <div class="cal-day-num">ДЕНЬ ${d.day} (ФИНАЛ)</div>
                         <div class="cal-item-icon">${icon}</div>
                         <div class="megapack-info">
-                            <div class="cal-day-num" style="color:#f472b6">МЕГАКОМПЛЕКТ</div>
-                            <div class="cal-item-desc">${idx < claimedCalDays ? '✓ НАГРАДА ЗАБРАНА' : d.desc}</div>
+                            <div class="cal-day-num" style="color:#f97316">МЕГАКОМПЛЕКТ</div>
+                            <div class="cal-item-desc">${eventEnded && idx >= claimedCalDays ? '❌ ПРОСРОЧЕНО' : (idx < claimedCalDays ? '✓ НАГРАДА ЗАБРАНА' : d.desc)}</div>
                         </div>
                     `;
                 } else {
                     el.innerHTML = `
                         <div class="cal-day-num">${d.day}Д</div>
                         <div class="cal-item-icon">${icon}</div>
-                        <div class="cal-item-desc">${idx < claimedCalDays ? '✓ ЗАБРАНО' : d.desc}</div>
+                        <div class="cal-item-desc">${eventEnded && idx >= claimedCalDays ? '❌ ПРОСРОЧЕНО' : (idx < claimedCalDays ? '✓ ЗАБРАНО' : d.desc)}</div>
                     `;
                 }
-if (statusClass === 'ready') {
+
+                if (statusClass === 'ready' && !eventEnded) {
                     el.onclick = () => claimCalendarReward(d);
                 }
 
@@ -1291,7 +1440,7 @@ if (statusClass === 'ready') {
         }
 
         function claimCalendarReward(reward) {
-            if (isClaimingInProgress) return;
+            if (isClaimingInProgress || getEventTimeLeft() <= 0) return;
             isClaimingInProgress = true;
 
             claimedCalDays++;
@@ -1316,7 +1465,7 @@ if (statusClass === 'ready') {
         function renderShop() {
             shopItemsContainer.innerHTML = '';
             if (activeShopTab === 'skins') {
-                skinsList.forEach(skin => {
+skinsList.forEach(skin => {
                     const isUnlocked = unlockedSkins.includes(skin.id);
                     const isEquipped = currentSkin === skin.id;
 
@@ -1359,7 +1508,7 @@ if (statusClass === 'ready') {
                               isUnlocked ? `<button class="item-action-btn purchased" onclick="selectMap(${map.id})">КУПЛЕНО ✓</button>` : 
                               map.price > 90000 ? '<button class="item-action-btn equipped" style="color:#fbbf24;">ИЗ КАЛЕНДАРЯ</button>' :
                               `<button class="item-action-btn buy" onclick="buyMap(${map.id}, ${map.price})">💰 ${map.price}</button>`}
-</div>
+                        </div>
                     `;
                     shopItemsContainer.appendChild(itemEl);
                 });
@@ -1392,7 +1541,7 @@ if (statusClass === 'ready') {
             } else if (skinId === 'gold' || skinId === 'cal_mega_king') {
                 planeColor = skinId === 'cal_mega_king' ? '#ff00ea' : '#ffd700';
                 penguinBody = skinId === 'cal_mega_king' ? '#7c3aed' : '#b8860b';
-                beakColor = skinId === 'cal_mega_king' ? '#00ffff' : '#ffffff';
+beakColor = skinId === 'cal_mega_king' ? '#00ffff' : '#ffffff';
             }
 
             renderCtx.scale(1.3, 1.3);
@@ -1461,7 +1610,7 @@ if (statusClass === 'ready') {
             renderCtx.stroke();
             
             if (skinId === 'plasma' || skinId === 'cal_mega_king') {
-renderCtx.strokeStyle = skinId === 'cal_mega_king' ? '#00ffff' : '#ffffff';
+                renderCtx.strokeStyle = skinId === 'cal_mega_king' ? '#00ffff' : '#ffffff';
                 renderCtx.lineWidth = 1.8;
                 renderCtx.beginPath();
                 renderCtx.moveTo(-22, 6);
@@ -1483,7 +1632,7 @@ renderCtx.strokeStyle = skinId === 'cal_mega_king' ? '#00ffff' : '#ffffff';
             pCtx.save();
             pCtx.translate(30, 30);
             
-            let color = '#38bdf8';
+            let color = '#f97316';
             if (skinId === 'rainbow') color = `hsl(${(Date.now() / 10) % 360}, 90%, 60%)`;
             else if (skinId === 'gold') color = '#ffd700';
             else if (skinId === 'void') color = '#a855f7';
@@ -1493,7 +1642,7 @@ renderCtx.strokeStyle = skinId === 'cal_mega_king' ? '#00ffff' : '#ffffff';
             else if (skinId === 'cal_stellar_ace') color = '#38bdf8';
 
             pCtx.shadowBlur = 10;
-            pCtx.shadowColor = color;
+pCtx.shadowColor = color;
             
             let fakeFrameCount = Math.floor(Date.now() / 50);
             drawPenguinInPlane(pCtx, skinId, fakeFrameCount, color, 0);
@@ -1559,7 +1708,7 @@ renderCtx.strokeStyle = skinId === 'cal_mega_king' ? '#00ffff' : '#ffffff';
 
         backArrowShop.addEventListener('click', () => {
             shopMenu.style.display = 'none';
-mainMenu.style.display = 'flex';
+            mainMenu.style.display = 'flex';
             updateWalletUI();
         });
 
@@ -1569,6 +1718,7 @@ mainMenu.style.display = 'flex';
         });
         
         backArrowCalendar.addEventListener('click', () => {
+            if (calTimerInterval) clearInterval(calTimerInterval); 
             calendarScreen.classList.remove('active');
             showScreenLoader("ЗАГРУЗКА МЕНЮ...", () => {
                 calendarScreen.style.display = 'none';
@@ -1587,14 +1737,50 @@ mainMenu.style.display = 'flex';
             mainMenu.style.display = 'none';
             settingsMenu.style.display = 'flex';
         });
+
+        toggleControlBtn.addEventListener('click', () => {
+            controlMode = controlMode === 'follow' ? 'tap' : 'follow';
+            saveGameData();
+            updateControlBtnUI();
+        });
         
         calendarBtn.addEventListener('click', () => {
             showScreenLoader("ОТКРЫТИЕ КАЛЕНДАРЯ...", () => {
-                mainMenu.style.display = 'none';
+mainMenu.style.display = 'none';
                 calendarScreen.style.display = 'flex';
                 setTimeout(() => { calendarScreen.classList.add('active'); }, 10);
                 renderCalendarGrid();
             });
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            if (!gameRunning || isPaused) return;
+            isPaused = true;
+            pauseModal.style.display = 'flex';
+            if (useCustomMusic && !customAudio.paused) {
+                customAudio.pause();
+            }
+        });
+
+        resumeGameBtn.addEventListener('click', () => {
+            isPaused = false;
+            pauseModal.style.display = 'none';
+            if (musicEnabled && useCustomMusic && customAudio.paused) {
+                customAudio.play().catch(e => console.log(e));
+            }
+        });
+
+        pauseMenuReturnBtn.addEventListener('click', () => {
+            isPaused = false;
+            gameRunning = false;
+            pauseModal.style.display = 'none';
+            uiOverlay.style.display = 'none';
+            mainMenu.style.display = 'flex';
+            isAutoPlay = true;
+            obstacles = [];
+            collectibleCoins = [];
+            collectibleBoosts = [];
+            stopMusicEngine(); 
         });
 
         restartGameBtn.addEventListener('click', () => {
@@ -1611,6 +1797,8 @@ mainMenu.style.display = 'flex';
             mainMenu.style.display = 'flex';
             isAutoPlay = true;
             obstacles = [];
+            collectibleCoins = [];
+            collectibleBoosts = [];
             playBtn.innerText = 'ИГРАТЬ';
         });
 
@@ -1643,9 +1831,7 @@ mainMenu.style.display = 'flex';
             }
         });
 
-        // СТАРТ ИГРЫ: ОГРОМНЫЙ ГРАДИЕНТНЫЙ ТЕКСТ ПО СЕРЕДИНЕ, КОТОРЫЙ МЕДЛЕННО ИСЧЕЗАЕТ
         let goalTextAlpha = 0;
-        let goalTextString = "ГЛАВНАЯ ЦЕЛЬ: НАБРАТЬ БОЛЬШЕ ОЧКОВ!";
 
         playBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -1655,7 +1841,7 @@ mainMenu.style.display = 'flex';
             isAutoPlay = false; 
             startGame();
             startMelodyEngine();
-            goalTextAlpha = 2.5; // Плавное затухание текста цели по центру
+            goalTextAlpha = 2.5;
         });
 
         function initAudio() {
@@ -1667,11 +1853,12 @@ mainMenu.style.display = 'flex';
             }
             if (audioCtx.state === 'suspended') audioCtx.resume();
         }
-function setupCustomAudioNode() {
+
+        function setupCustomAudioNode() {
             if (!audioCtx) initAudio();
             if (customAudio && !sourceNode) {
                 try {
-                    sourceNode = audioCtx.createMediaElementSource(customAudio);
+sourceNode = audioCtx.createMediaElementSource(customAudio);
                     sourceNode.connect(analyser);
                     analyser.connect(audioCtx.destination);
                 } catch(e) {}
@@ -1701,7 +1888,7 @@ function setupCustomAudioNode() {
             let beatStep = 0;
 
             melodyTimer = setInterval(() => {
-                if (!audioCtx || !musicEnabled) return;
+                if (!audioCtx || !musicEnabled || isPaused) return;
                 let time = audioCtx.currentTime;
 
                 if (beatStep % 16 === 0) {
@@ -1743,11 +1930,13 @@ function setupCustomAudioNode() {
         function stopMusicEngine() {
             if (melodyTimer) { clearInterval(melodyTimer); melodyTimer = null; }
             if (customAudio && !customAudio.paused) {
-                let fadeVol = 1.0;
-                let fadeInterval = setInterval(() => {
+                if (audioFadeInterval) clearInterval(audioFadeInterval);
+                let fadeVol = customAudio.volume;
+                audioFadeInterval = setInterval(() => {
                     fadeVol -= 0.1;
                     if (fadeVol <= 0) {
-                        clearInterval(fadeInterval);
+                        clearInterval(audioFadeInterval);
+                        audioFadeInterval = null;
                         customAudio.pause();
                         customAudio.currentTime = 0;
                         customAudio.volume = 1.0;
@@ -1773,6 +1962,51 @@ osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
             osc.stop(audioCtx.currentTime + 0.08);
         }
 
+        function playCoinPickupSound() {
+            if (!audioCtx || !musicEnabled) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(987.77, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1318.51, audioCtx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        function playBoostPickupSound() {
+            if (!audioCtx || !musicEnabled) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.2);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.2);
+        }
+
+        function playFlapSound() {
+            if (!audioCtx || !musicEnabled) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(250, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(450, audioCtx.currentTime + 0.06);
+            gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.06);
+        }
+
         function playGameOverSound() {
             if (!audioCtx || !musicEnabled) return;
             const osc = audioCtx.createOscillator();
@@ -1788,49 +2022,150 @@ osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
             osc.stop(audioCtx.currentTime + 0.35);
         }
 
-        const player = { x: 120, y: window.innerHeight / 2, radius: 24, targetY: window.innerHeight / 2, currentTilt: 0 };
+        const player = { x: 120, y: window.innerHeight / 2, radius: 24, targetY: window.innerHeight / 2, vy: 0, currentTilt: 0 };
         let obstacles = [];
+        let collectibleCoins = [];
+        let collectibleBoosts = [];
         let particles = [];
         let frameCount = 0;
-        let isTouching = false;
         
         let currentSpeed = 3.8;
         const baseSpeed = 3.8;
         const maxSpeed = 8.2;
+        
+        // Буфер бесконечной сгенерированной карты (предотвращает разрывы и баги генерации)
+        let mapSegments = [];
+        const segmentWidth = 1000;
 
-        canvas.addEventListener('mousemove', (e) => { 
-            if(!isAutoPlay) player.targetY = e.clientY; 
-        }, { passive: true });
+        function handlePointerInput(clientY) {
+            if (isAutoPlay || isPaused || !gameRunning) return;
+            if (controlMode === 'follow') {
+                player.targetY = clientY;
+            } else {
+player.vy = -7.5;
+                playFlapSound();
+            }
+        }
 
-        canvas.addEventListener('touchmove', (e) => { 
-            if(!isAutoPlay && e.touches.length > 0) {
-                player.targetY = e.touches[0].clientY;
+        window.addEventListener('mousemove', (e) => { 
+            if (controlMode === 'follow') handlePointerInput(e.clientY);
+        });
+
+        window.addEventListener('mousedown', (e) => {
+            if (e.target.tagName === 'BUTTON' || e.target.closest('.results-modal') || e.target.closest('.sub-screen')) return;
+            if (controlMode === 'tap') handlePointerInput(e.clientY);
+        });
+
+        window.addEventListener('touchmove', (e) => { 
+            if (e.touches.length > 0 && controlMode === 'follow') {
+                handlePointerInput(e.touches[0].clientY);
             }
         }, { passive: true });
 
-        canvas.addEventListener('touchstart', (e) => { 
-            if(!isAutoPlay && e.touches.length > 0) {
-                isTouching = true;
-                player.targetY = e.touches[0].clientY;
+        window.addEventListener('touchstart', (e) => { 
+            if (e.target.tagName === 'BUTTON' || e.target.closest('.results-modal') || e.target.closest('.sub-screen')) return;
+            if (e.touches.length > 0) {
+                handlePointerInput(e.touches[0].clientY);
             }
         }, { passive: true });
 
-        canvas.addEventListener('touchend', () => { isTouching = false; }, { passive: true });
-        canvas.addEventListener('touchcancel', () => { isTouching = false; }, { passive: true });
+        function generateMapSegment(startX) {
+            let obstaclesInSegment = [];
+            let coinsInSegment = [];
+            let boostsInSegment = [];
+
+            let currentX = startX + 300;
+            let endX = startX + segmentWidth;
+
+            while (currentX < endX - 150) {
+                let difficultyProgress = Math.min(score / 1000, 1.0); 
+                let minGap = Math.max(160, 220 - difficultyProgress * 40);
+                let maxGap = Math.max(190, 250 - difficultyProgress * 40);
+                let gapHeight = Math.floor(Math.random() * (maxGap - minGap + 1)) + minGap;
+                
+                const safetyMargin = 60;
+                if (gapHeight > canvas.height - safetyMargin * 2) {
+                    gapHeight = Math.max(80, canvas.height - safetyMargin * 2);
+                }
+
+                const maxPos = Math.max(safetyMargin, canvas.height - safetyMargin - gapHeight);
+                const minPos = safetyMargin;
+                const gapY = Math.random() * (maxPos - minPos) + minPos;
+
+                const widths = [38, 44, 50];
+                const width = widths[Math.floor(Math.random() * widths.length)];
+
+                obstaclesInSegment.push({ 
+                    x: currentX, 
+                    width: width, 
+                    topHeight: gapY, 
+                    bottomY: gapY + gapHeight, 
+                    bottomHeight: canvas.height - (gapY + gapHeight), 
+                    passed: false,
+                    spawnAnimProgress: 1.0 
+                });
+
+                if (Math.random() < 0.65) {
+                    coinsInSegment.push({
+                        x: currentX + width / 2,
+                        y: gapY + gapHeight / 2,
+                        radius: 12,
+                        collected: false
+                    });
+                }
+
+                // Редкий шанс появления молнии (ускорение)
+                if (Math.random() < 0.12) {
+                    boostsInSegment.push({
+                        x: currentX + width / 2,
+                        y: gapY + gapHeight / 2 + (Math.random() > 0.5 ? -35 : 35),
+                        radius: 14,
+                        collected: false
+                    });
+                }
+
+                currentX += Math.floor(Math.random() * 180) + 220;
+            }
+
+            return { startX: startX, endX: endX, obstacles: obstaclesInSegment, coins: coinsInSegment, boosts: boostsInSegment };
+        }
+
+        function initEndlessMap() {
+            obstacles = [];
+            collectibleCoins = [];
+            collectibleBoosts = [];
+            mapSegments = [];
+
+            // Создаем 3 непрерывных сегмента карты на старте для идеальной бесшовности
+            for (let i = 0; i < 3; i++) {
+                let seg = generateMapSegment(i * segmentWidth);
+                mapSegments.push(seg);
+                obstacles.push(...seg.obstacles);
+collectibleCoins.push(...seg.coins);
+                collectibleBoosts.push(...seg.boosts);
+            }
+        }
 
         function startGame() {
             score = 0;
+            sessionCoins = 0;
             scoreVal.innerText = score;
-            obstacles = [];
-            particles = [];
+            hudCoinsVal.innerText = sessionCoins;
+            speedBoostTimer = 0;
+            boostTimerText.style.display = 'none';
+
             player.y = window.innerHeight / 2;
             player.targetY = window.innerHeight / 2;
+            player.vy = 0;
             player.currentTilt = 0;
             frameCount = 0;
             currentSpeed = baseSpeed;
             milestoneShownThisRun = false;
             gameRunning = true;
+            isPaused = false;
             bassCircleIntro = 1.0; 
+
+            initEndlessMap();
 
             if (!tutorialShown) {
                 tutorialShown = true;
@@ -1869,7 +2204,7 @@ osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
         }
 
         function playCoinRewardSong() {
-if (!audioCtx) initAudio();
+            if (!audioCtx) initAudio();
             if (!audioCtx) return;
             let now = audioCtx.currentTime;
             for (let i = 0; i < 6; i++) {
@@ -1887,15 +2222,16 @@ if (!audioCtx) initAudio();
         }
 
         function gameOver() {
+            if (!gameRunning) return; 
+            
             gameRunning = false;
             stopMusicEngine();
             gameToast.classList.remove('active');
             spawnExplosion(player.x, player.y, getCurrentTheme().primary);
             playGameOverSound();
 
-            let earnedCoins = score;
             let bonusCoins = Math.floor(score / 50) * 20;
-            let totalEarned = earnedCoins + bonusCoins;
+            let totalEarned = sessionCoins + bonusCoins;
 
             totalCoins += totalEarned;
             if (score > highScore) { highScore = score; highScoreVal.innerText = highScore; }
@@ -1910,33 +2246,6 @@ if (!audioCtx) initAudio();
             }, 300);
         }
 
-        // ГЕНЕРАЦИЯ КОЛОНН С УЧЕТОМ УРОВНЕЙ ДО 1000 И АНИМАЦИЕЙ ВСПЛЫВАНИЯ
-        function spawnObstacle() {
-            let difficultyProgress = Math.min(score / 1000, 1.0); 
-
-            let minGap = Math.max(160, 220 - difficultyProgress * 50);
-            let maxGap = Math.max(190, 250 - difficultyProgress * 50);
-            const gapHeight = Math.floor(Math.random() * (maxGap - minGap + 1)) + minGap;
-            
-            const safetyMargin = 60;
-            const maxPos = canvas.height - safetyMargin - gapHeight;
-            const minPos = safetyMargin;
-            const gapY = Math.random() * (maxPos - minPos) + minPos;
-
-            const widths = [32, 38, 46];
-            const width = widths[Math.floor(Math.random() * widths.length)];
-
-            obstacles.push({ 
-                x: canvas.width + 60, 
-                width: width, 
-                topHeight: gapY, 
-                bottomY: gapY + gapHeight, 
-                bottomHeight: canvas.height - (gapY + gapHeight), 
-                passed: false,
-                spawnAnimProgress: 0 
-            });
-        }
-
         function getCurrentTheme() {
             return colorThemes.find(m => m.id === currentMapIndex) || colorThemes[0];
         }
@@ -1948,9 +2257,23 @@ if (!audioCtx) initAudio();
 
             let timeFactor = dt / (1000 / 60);
             if (timeFactor > 3) timeFactor = 3;
+if (isPaused) return;
+
+            // Обработка таймера буста скорости от молнии
+            if (speedBoostTimer > 0) {
+                speedBoostTimer -= dt;
+                let secLeft = (speedBoostTimer / 1000).toFixed(1);
+                boostTimerText.innerText = `⚡ ${secLeft}s`;
+                boostTimerText.style.display = 'inline';
+                if (speedBoostTimer <= 0) {
+                    speedBoostTimer = 0;
+                    boostTimerText.style.display = 'none';
+                    showToast("Ускорение закончилось!", 2000);
+                }
+            }
 
             if (goalTextAlpha > 0) {
-                goalTextAlpha -= 0.008 * timeFactor; // Очень медленное и плавное исчезновение текста по центру
+                goalTextAlpha -= 0.008 * timeFactor;
                 if (goalTextAlpha < 0) goalTextAlpha = 0;
             }
 
@@ -1970,7 +2293,8 @@ if (!audioCtx) initAudio();
                     bassPulse = Math.max(bassPulse, calculatedPulse);
                 }
             }
-if (bassPulse > 0) { 
+
+            if (bassPulse > 0) { 
                 bassPulse -= 0.06 * timeFactor; 
                 if (bassPulse < 0) bassPulse = 0; 
             }
@@ -1979,12 +2303,19 @@ if (bassPulse > 0) {
                 menuTitle.style.transform = `scale(${1 + bassPulse * 0.15})`;
             }
 
-            stars.forEach(star => {
-                star.x -= star.speed * (gameRunning ? (currentSpeed / baseSpeed) : 1) * timeFactor;
-                if (star.x < 0) star.x = canvas.width;
-                star.alpha += Math.sin(frameCount * star.twinkleSpeed) * 0.02 * timeFactor;
-                if (star.alpha < 0.2) star.alpha = 0.2;
-                if (star.alpha > 1) star.alpha = 1;
+            leaves.forEach(leaf => {
+                leaf.x -= (leaf.speedX + (gameRunning ? (currentSpeed / baseSpeed) : 0.5)) * timeFactor;
+                leaf.y += (leaf.speedY + Math.sin(frameCount * leaf.swayFreq) * leaf.swayAmp) * timeFactor;
+                leaf.rotation += leaf.rotSpeed * timeFactor;
+
+                if (leaf.x < -20) {
+                    leaf.x = canvas.width + 20;
+                    leaf.y = Math.random() * canvas.height;
+                }
+                if (leaf.y > canvas.height + 20) {
+                    leaf.y = -20;
+                    leaf.x = Math.random() * canvas.width;
+                }
             });
 
             particles.forEach((p, index) => {
@@ -2010,45 +2341,104 @@ if (bassPulse > 0) {
                 player.currentTilt += (targetTilt - player.currentTilt) * (0.15 * timeFactor);
 
                 if (Math.floor(frameCount) % 3 === 0) {
-                    particles.push({ x: player.x - 20, y: player.y + (Math.random() * 14 - 7), size: Math.random() * 2.5 + 1.5, speedX: -3.5 - Math.random() * 1.5, alpha: 0.85, color: '#ffffff' });
+                    particles.push({ x: player.x - 20, y: player.y + (Math.random() * 14 - 7), size: Math.random() * 2.5 + 1.5, speedX: -3.5 - Math.random() * 1.5, alpha: 0.85, color: '#f97316' });
                 }
                 return;
             }
 
             if (!gameRunning) return;
 
+            let activeSpeed = currentSpeed;
+            if (speedBoostTimer > 0) activeSpeed *= 1.6; // Увеличенная скорость при ускорении от молнии
+
             let speedMultiplier = 1 + Math.min(score / 1000, 1.5);
-            if (currentSpeed < maxSpeed * speedMultiplier) {
+if (currentSpeed < maxSpeed * speedMultiplier) {
                 currentSpeed += 0.0015 * timeFactor;
             }
 
-            let prevY = player.y;
-            player.y += (player.targetY - player.y) * (0.32 * timeFactor);
-            if (player.y < player.radius) player.y = player.radius;
-            if (player.y > canvas.height - player.radius) player.y = canvas.height - player.radius;
+            // Бесконечное бесшовное продвижение и циклирование сегментов карты
+            let moveDist = activeSpeed * timeFactor;
+            obstacles.forEach(o => o.x -= moveDist);
+            collectibleCoins.forEach(c => c.x -= moveDist);
+            collectibleBoosts.forEach(b => b.x -= moveDist);
 
-            let targetTilt = (player.y - prevY) * 0.05;
+            mapSegments.forEach(seg => {
+                seg.startX -= moveDist;
+                seg.endX -= moveDist;
+            });
+
+            // Если первый сегмент ушел за левый край экрана, переносим его вперед для бесконечного кольца без ошибок
+            if (mapSegments.length > 0 && mapSegments[0].endX < -100) {
+                let oldSeg = mapSegments.shift();
+                let lastSeg = mapSegments[mapSegments.length - 1];
+                let newStartX = lastSeg.endX;
+                let newSeg = generateMapSegment(newStartX);
+                mapSegments.push(newSeg);
+                obstacles.push(...newSeg.obstacles);
+                collectibleCoins.push(...newSeg.coins);
+                collectibleBoosts.push(...newSeg.boosts);
+            }
+
+            // Удаление объектов, вышедших из поля зрения
+            obstacles = obstacles.filter(o => o.x + o.width > -100);
+            collectibleCoins = collectibleCoins.filter(c => c.x > -50 && !c.collected);
+            collectibleBoosts = collectibleBoosts.filter(b => b.x > -50 && !b.collected);
+
+            let prevY = player.y;
+
+            if (controlMode === 'follow') {
+                player.y += (player.targetY - player.y) * (0.32 * timeFactor);
+            } else {
+                player.vy += 0.38 * timeFactor; 
+                player.y += player.vy * timeFactor;
+            }
+
+            if (player.y < player.radius) {
+                player.y = player.radius;
+                player.vy = 0;
+            }
+            if (player.y > canvas.height - player.radius) {
+                player.y = canvas.height - player.radius;
+                gameOver();
+            }
+
+            let targetTilt = controlMode === 'follow' ? (player.y - prevY) * 0.05 : player.vy * 0.06;
             if (targetTilt > 0.45) targetTilt = 0.45;
             if (targetTilt < -0.45) targetTilt = -0.45;
             player.currentTilt += (targetTilt - player.currentTilt) * (0.15 * timeFactor);
 
-            let spawnRate = Math.max(50, Math.floor(90 - (currentSpeed * 4)));
-            if (Math.floor(frameCount) % spawnRate === 0) spawnObstacle();
-
             if (Math.floor(frameCount) % 3 === 0) {
-                particles.push({ x: player.x - 20, y: player.y + (Math.random() * 14 - 7), size: Math.random() * 2.5 + 1.5, speedX: -3.5 - Math.random() * 1.5, alpha: 0.85, color: '#ffffff' });
+                particles.push({ x: player.x - 20, y: player.y + (Math.random() * 14 - 7), size: Math.random() * 2.5 + 1.5, speedX: -3.5 - Math.random() * 1.5, alpha: 0.85, color: speedBoostTimer > 0 ? '#00ffff' : '#f97316' });
             }
 
-            obstacles.forEach((obs, index) => {
-                if (obs.spawnAnimProgress < 1) {
-                    obs.spawnAnimProgress += 0.04 * timeFactor;
-                    if (obs.spawnAnimProgress > 1) obs.spawnAnimProgress = 1;
+            // Сбор монет
+            collectibleCoins.forEach((c) => {
+                let dist = Math.hypot(player.x - c.x, player.y - c.y);
+                if (!c.collected && dist < player.radius + c.radius) {
+                    c.collected = true;
+                    sessionCoins += 5;
+                    hudCoinsVal.innerText = sessionCoins;
+                    playCoinPickupSound();
+                    spawnExplosion(c.x, c.y, '#fbbf24');
                 }
+            });
 
-                obs.x -= currentSpeed * timeFactor;
+            // Сбор бонусов молнии (ускорение)
+            collectibleBoosts.forEach((b) => {
+                let dist = Math.hypot(player.x - b.x, player.y - b.y);
+                if (!b.collected && dist < player.radius + b.radius) {
+                    b.collected = true;
+                    speedBoostTimer = boostDuration;
+                    playBoostPickupSound();
+                    spawnExplosion(b.x, b.y, '#00ffff');
+                    showToast("⚡ СУПЕР УСКОРЕНИЕ НА 5 СЕК!", 2500);
+                }
+            });
 
+            // Проверка столкновений с препятствиями
+            obstacles.forEach((obs) => {
                 if (player.x + (player.radius - 5) > obs.x && player.x - (player.radius - 5) < obs.x + obs.width) {
-                    if (player.y - (player.radius - 5) < obs.topHeight || player.y + (player.radius - 5) > obs.bottomY) gameOver();
+if (player.y - (player.radius - 5) < obs.topHeight || player.y + (player.radius - 5) > obs.bottomY) gameOver();
                 }
 
                 if (!obs.passed && obs.x + obs.width < player.x) { 
@@ -2058,13 +2448,12 @@ if (bassPulse > 0) {
                     playScoreSound(); 
 
                     if (score >= 50 && !milestoneShownThisRun && congratsCount < 10) {
-milestoneShownThisRun = true;
+                        milestoneShownThisRun = true;
                         congratsCount++;
                         saveGameData();
                         showToast("МОЛОДЕЦ! 🚀 Отличный результат!", 2500);
                     }
                 }
-                if (obs.x + obs.width < -50) obstacles.splice(index, 1);
             });
         }
 
@@ -2130,12 +2519,8 @@ milestoneShownThisRun = true;
             }
             ctx.restore();
 
-            stars.forEach(star => {
-                ctx.fillStyle = theme.primary;
-                ctx.globalAlpha = star.alpha;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-                ctx.fill();
+            leaves.forEach(leaf => {
+                drawLeaf(ctx, leaf.x, leaf.y, leaf.size, leaf.rotation, leaf.color);
             });
 
             ctx.save();
@@ -2148,7 +2533,7 @@ milestoneShownThisRun = true;
             ctx.arc(centerX, centerY, baseRadius + pulseOffset, 0, Math.PI * 2);
 
             if (bassCircleIntro > 0.01) {
-                ctx.fillStyle = `rgba(255, 255, 255, ${bassCircleIntro * 0.85})`;
+                ctx.fillStyle = `rgba(251, 146, 60, ${bassCircleIntro * 0.85})`;
                 ctx.fill();
             } else {
                 ctx.fillStyle = theme.darkBlock;
@@ -2157,15 +2542,15 @@ milestoneShownThisRun = true;
             }
 
             ctx.lineWidth = 3 + bassPulse * 10;
-            ctx.strokeStyle = '#ffffff';
-            ctx.shadowColor = '#ffffff';
-            ctx.shadowBlur = 18 + bassPulse * 40;
+            ctx.strokeStyle = '#f97316';
+            ctx.shadowColor = '#f97316';
+ctx.shadowBlur = 18 + bassPulse * 40;
             ctx.globalAlpha = 0.25 + bassCircleIntro * 0.75 + bassPulse * 0.65;
             ctx.stroke();
 
             ctx.beginPath();
             ctx.arc(centerX, centerY, baseRadius + pulseOffset + 4, 0, Math.PI * 2);
-ctx.strokeStyle = theme.primary;
+            ctx.strokeStyle = theme.primary;
             ctx.lineWidth = 2;
             ctx.globalAlpha = 0.3 + bassPulse * 0.5;
             ctx.stroke();
@@ -2200,7 +2585,42 @@ ctx.strokeStyle = theme.primary;
                     drawPerfectStraightObstacle(obs, false, theme);
                 });
 
-                // ОГРОМНЫЙ КРАСИВЫЙ ГРАДИЕНТНЫЙ ТЕКСТ ПО СЕРЕДИНЕ (ЦЕЛЬ ИГРЫ), ПЛАВНО ИСЧЕЗАЮЩИЙ
+                collectibleCoins.forEach(c => {
+                    ctx.save();
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = '#fbbf24';
+                    ctx.beginPath();
+                    ctx.arc(c.x, c.y, c.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                    ctx.restore();
+                });
+
+                // Отрисовка значка молнии (ускорения)
+                collectibleBoosts.forEach(b => {
+                    ctx.save();
+                    ctx.fillStyle = '#00ffff';
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = '#00ffff';
+                    ctx.beginPath();
+                    ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+
+                    // Рисуем символ молнии внутри
+                    ctx.fillStyle = '#0d0805';
+                    ctx.font = '900 16px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('⚡', b.x, b.y);
+                    ctx.restore();
+                });
+
                 if (goalTextAlpha > 0) {
                     ctx.save();
                     ctx.font = '900 34px "Segoe UI", sans-serif';
@@ -2208,12 +2628,12 @@ ctx.strokeStyle = theme.primary;
                     ctx.textBaseline = 'middle';
                     
                     let grad = ctx.createLinearGradient(canvas.width/2 - 250, canvas.height/2, canvas.width/2 + 250, canvas.height/2);
-                    grad.addColorStop(0, '#38bdf8');
-                    grad.addColorStop(0.5, '#c084fc');
-                    grad.addColorStop(1, '#ec4899');
+                    grad.addColorStop(0, '#f97316');
+                    grad.addColorStop(0.5, '#eab308');
+                    grad.addColorStop(1, '#ef4444');
                     
                     ctx.fillStyle = grad;
-                    ctx.shadowColor = '#ec4899';
+                    ctx.shadowColor = '#f97316';
                     ctx.shadowBlur = 25;
                     ctx.globalAlpha = Math.min(1.0, goalTextAlpha);
                     ctx.fillText("ГЛАВНАЯ ЦЕЛЬ: НАБРАТЬ БОЛЬШЕ ОЧКОВ!", canvas.width / 2, canvas.height / 2);
@@ -2223,7 +2643,7 @@ ctx.strokeStyle = theme.primary;
 
             if (gameRunning || isAutoPlay) {
                 ctx.save();
-                ctx.translate(player.x, player.y);
+ctx.translate(player.x, player.y);
                 
                 ctx.shadowBlur = 25;
                 ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
@@ -2234,6 +2654,10 @@ ctx.strokeStyle = theme.primary;
                 else if (currentSkin === 'void') primaryColor = '#a855f7';
                 else if (currentSkin === 'plasma') primaryColor = '#00ffff';
                 else if (currentSkin === 'cal_mega_king') primaryColor = '#ff00ea';
+
+                if (speedBoostTimer > 0) {
+                    primaryColor = '#00ffff'; // Подсветка во время буста
+                }
 
                 let playerScale = 1 + bassPulse * 0.18;
                 ctx.scale(playerScale, playerScale);
